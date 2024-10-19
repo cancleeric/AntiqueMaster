@@ -1,6 +1,16 @@
 
 # AntiqueMaster - iOS 應用程式
 
+Notes:
+- Core logic for role assignment, voting, and round management completed.
+- Images are dynamically scaled to fit the screen.
+
+TODO:
+- Handle safe area insets to ensure UI elements are not obstructed by notches or system UI.
+- Refine the layout for different screen sizes, especially in vertical mode.
+- Implement local multiplayer support using Bluetooth/Wi-Fi.
+- Add more characters and extend game logic to support them."
+
 ## 簡介
 
 AntiqueMaster 是一款專為桌遊《古董的欺詐 - 十二生肖銅像》設計的 iOS 應用程式。此應用協助玩家管理遊戲設置、回合流程及規則執行，並提供數位化的平臺來進行角色分配、投票與計分，讓遊戲更加流暢。
@@ -50,6 +60,8 @@ AntiqueMaster 是一款專為桌遊《古董的欺詐 - 十二生肖銅像》設
 1. **本地多玩家互動**：使用藍牙或 Wi-Fi 支持本地的多人互動遊戲體驗。
 2. **更多角色**：支持更多角色及其技能，進一步增強遊戲深度。
 
-## 授權條款
+授權條款
 
-本項目依照 **MIT 授權條款** 發佈。詳情請參閱 LICENSE 文件。
+本專案依照 Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) 授權條款發佈。這意味著你可以自由地分享和修改本專案，前提是必須署名歸屬原作者，且不可將本專案用於商業用途。
+
+請參閱隨附的 LICENSE 文件以獲取更多詳情。
