@@ -6,9 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		186442502CC3FDCA00C0CDB5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1864424F2CC3FDC900C0CDB5 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		186442162CC3E6AE00C0CDB5 /* AntiqueMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AntiqueMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		186442272CC3E6AE00C0CDB5 /* AntiqueMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AntiqueMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1864424F2CC3FDC900C0CDB5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -19,6 +24,10 @@
 				Assets.xcassets,
 				GameScene.sks,
 				GameScene.swift,
+				HStackNode.swift,
+				ScaledSpriteNode.swift,
+				VStackNode.swift,
+				ZodiacStatue.swift,
 			);
 			target = 186442152CC3E6AE00C0CDB5 /* AntiqueMaster iOS */;
 		};
@@ -29,6 +38,10 @@
 				Assets.xcassets,
 				GameScene.sks,
 				GameScene.swift,
+				HStackNode.swift,
+				ScaledSpriteNode.swift,
+				VStackNode.swift,
+				ZodiacStatue.swift,
 			);
 			target = 186442262CC3E6AE00C0CDB5 /* AntiqueMaster macOS */;
 		};
@@ -77,6 +90,7 @@
 		186442082CC3E6AC00C0CDB5 = {
 			isa = PBXGroup;
 			children = (
+				1864424F2CC3FDC900C0CDB5 /* README.md */,
 				1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */,
 				186442182CC3E6AE00C0CDB5 /* AntiqueMaster iOS */,
 				186442282CC3E6AE00C0CDB5 /* AntiqueMaster macOS */,
@@ -183,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186442502CC3FDCA00C0CDB5 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -50,6 +50,62 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.setUpScene()
+        self.backgroundColor = SKColor.white // 設置背景顏色
+
+
+        // 計算畫面上可用的寬度和高度
+        let availableWidth = self.size.width * 0.8  // 使用螢幕寬度的 80%
+        let availableHeight = self.size.height * 0.8 // 使用螢幕高度的 80%
+
+        // 設定元件數：每排3個，每列4排
+        let itemsPerRow = 3
+        let itemsPerColumn = 4
+
+        // 假設每個銅像之間有固定的水平和垂直間距
+        let horizontalSpacing: CGFloat = 20
+        let verticalSpacing: CGFloat = 20
+
+        // 計算每個元件可顯示的最大寬度和高度
+        let maxItemWidth = (availableWidth - CGFloat(itemsPerRow - 1) * horizontalSpacing) / CGFloat(itemsPerRow)
+        let maxItemHeight = (availableHeight - CGFloat(itemsPerColumn - 1) * verticalSpacing) / CGFloat(itemsPerColumn)
+
+        // 使用 VStack 和 HStack 來佈局縮放後的圖片
+        layoutStatuesInGrid(availableWidth: availableWidth,
+                            availableHeight: availableHeight,
+                            itemsPerRow: itemsPerRow,
+                            itemsPerColumn: itemsPerColumn,
+                            maxItemSize: CGSize(width: maxItemWidth, height: maxItemHeight),
+                            horizontalSpacing: horizontalSpacing,
+                            verticalSpacing: verticalSpacing)
+    }
+    
+    
+    private func layoutStatuesInGrid(availableWidth: CGFloat, availableHeight: CGFloat,
+                                     itemsPerRow: Int, itemsPerColumn: Int,
+                                     maxItemSize: CGSize, horizontalSpacing: CGFloat, verticalSpacing: CGFloat) {
+        // 創建 VStackNode，負責垂直排列
+        let vStack = VStackNode(containerHeight: availableHeight)
+        vStack.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2) // 放在螢幕中央
+        self.addChild(vStack)
+
+        // 所有生肖銅像的名稱
+        let zodiacNames = ["Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"]
+
+        // 排列圖像
+        for row in 0..<itemsPerColumn {
+            let hStack = HStackNode(containerWidth: availableWidth) // 每一排的寬度
+
+            for column in 0..<itemsPerRow {
+                let index = row * itemsPerRow + column
+                if index < zodiacNames.count {
+                    let statue = ScaledSpriteNode(imageNamed: zodiacNames[index], maxSize: maxItemSize)
+                    hStack.addElement(statue) // 添加到 HStackNode
+                }
+            }
+
+            // 將每一排 (HStack) 添加到 VStack 中
+            vStack.addElement(hStack)
+        }
     }
 
     func makeSpinny(at pos: CGPoint, color: SKColor) {
