@@ -11,11 +11,22 @@
 		186442522CC401CD00C0CDB5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 186442512CC401CD00C0CDB5 /* LICENSE */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		18E5D3A12CC5510B008425A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 186442092CC3E6AC00C0CDB5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 186442152CC3E6AE00C0CDB5;
+			remoteInfo = "AntiqueMaster iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		186442162CC3E6AE00C0CDB5 /* AntiqueMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AntiqueMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		186442272CC3E6AE00C0CDB5 /* AntiqueMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AntiqueMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864424F2CC3FDC900C0CDB5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		186442512CC401CD00C0CDB5 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		18E5D39D2CC5510B008425A0 /* AntiqueMasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AntiqueMasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -24,6 +35,8 @@
 			membershipExceptions = (
 				Actions.sks,
 				Assets.xcassets,
+				DebugLogger.swift,
+				DeviceLayer.swift,
 				GameScene.sks,
 				GameScene.swift,
 				HStackNode.swift,
@@ -38,6 +51,8 @@
 			membershipExceptions = (
 				Actions.sks,
 				Assets.xcassets,
+				DebugLogger.swift,
+				DeviceLayer.swift,
 				GameScene.sks,
 				GameScene.swift,
 				HStackNode.swift,
@@ -69,6 +84,11 @@
 			path = "AntiqueMaster macOS";
 			sourceTree = "<group>";
 		};
+		18E5D39E2CC5510B008425A0 /* AntiqueMasterTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AntiqueMasterTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +106,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18E5D39A2CC5510B008425A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -97,6 +124,7 @@
 				1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */,
 				186442182CC3E6AE00C0CDB5 /* AntiqueMaster iOS */,
 				186442282CC3E6AE00C0CDB5 /* AntiqueMaster macOS */,
+				18E5D39E2CC5510B008425A0 /* AntiqueMasterTests */,
 				186442172CC3E6AE00C0CDB5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +134,7 @@
 			children = (
 				186442162CC3E6AE00C0CDB5 /* AntiqueMaster.app */,
 				186442272CC3E6AE00C0CDB5 /* AntiqueMaster.app */,
+				18E5D39D2CC5510B008425A0 /* AntiqueMasterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +186,29 @@
 			productReference = 186442272CC3E6AE00C0CDB5 /* AntiqueMaster.app */;
 			productType = "com.apple.product-type.application";
 		};
+		18E5D39C2CC5510B008425A0 /* AntiqueMasterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18E5D3A32CC5510B008425A0 /* Build configuration list for PBXNativeTarget "AntiqueMasterTests" */;
+			buildPhases = (
+				18E5D3992CC5510B008425A0 /* Sources */,
+				18E5D39A2CC5510B008425A0 /* Frameworks */,
+				18E5D39B2CC5510B008425A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18E5D3A22CC5510B008425A0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				18E5D39E2CC5510B008425A0 /* AntiqueMasterTests */,
+			);
+			name = AntiqueMasterTests;
+			packageProductDependencies = (
+			);
+			productName = AntiqueMasterTests;
+			productReference = 18E5D39D2CC5510B008425A0 /* AntiqueMasterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -172,6 +224,10 @@
 					};
 					186442262CC3E6AE00C0CDB5 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					18E5D39C2CC5510B008425A0 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 186442152CC3E6AE00C0CDB5;
 					};
 				};
 			};
@@ -191,6 +247,7 @@
 			targets = (
 				186442152CC3E6AE00C0CDB5 /* AntiqueMaster iOS */,
 				186442262CC3E6AE00C0CDB5 /* AntiqueMaster macOS */,
+				18E5D39C2CC5510B008425A0 /* AntiqueMasterTests */,
 			);
 		};
 /* End PBXProject section */
@@ -206,6 +263,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		186442252CC3E6AE00C0CDB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18E5D39B2CC5510B008425A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -229,7 +293,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		18E5D3992CC5510B008425A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18E5D3A22CC5510B008425A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 186442152CC3E6AE00C0CDB5 /* AntiqueMaster iOS */;
+			targetProxy = 18E5D3A12CC5510B008425A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1864423B2CC3E6AE00C0CDB5 /* Debug */ = {
@@ -241,6 +320,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TS7638N9FK;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "古董的欺詐";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -256,6 +337,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hurricanesoft.AntiqueMaster;
 				PRODUCT_NAME = AntiqueMaster;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -271,6 +356,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TS7638N9FK;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "古董的欺詐";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -286,6 +373,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hurricanesoft.AntiqueMaster;
 				PRODUCT_NAME = AntiqueMaster;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -465,6 +556,47 @@
 			};
 			name = Release;
 		};
+		18E5D3A42CC5510B008425A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TS7638N9FK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hurricanesoft.AntiqueMasterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AntiqueMaster.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AntiqueMaster";
+			};
+			name = Debug;
+		};
+		18E5D3A52CC5510B008425A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TS7638N9FK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hurricanesoft.AntiqueMasterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AntiqueMaster.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AntiqueMaster";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -491,6 +623,15 @@
 			buildConfigurations = (
 				1864423F2CC3E6AE00C0CDB5 /* Debug */,
 				186442402CC3E6AE00C0CDB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18E5D3A32CC5510B008425A0 /* Build configuration list for PBXNativeTarget "AntiqueMasterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18E5D3A42CC5510B008425A0 /* Debug */,
+				18E5D3A52CC5510B008425A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

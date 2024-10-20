@@ -42,3 +42,7 @@ Pods/
 # Derived data
 DerivedData/
 build/
+
+GoogleService-Info.plist
+*.log
+*.tmp
