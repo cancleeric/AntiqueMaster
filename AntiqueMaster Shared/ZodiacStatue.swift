@@ -7,6 +7,7 @@
 
 import SpriteKit
 
+// 銅像類別
 class ZodiacStatue {
     var spriteNode: SKSpriteNode
     

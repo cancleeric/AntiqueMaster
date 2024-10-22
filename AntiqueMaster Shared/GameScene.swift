@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: GridScene {
 
     fileprivate var label: SKLabelNode?
     fileprivate var spinnyNode: SKShapeNode?
@@ -52,6 +52,8 @@ class GameScene: SKScene {
     }
 
     override func didMove(to view: SKView) {
+        super.didMove(to: view)
+        
         self.setUpScene()
         self.backgroundColor = SKColor.white  // 設置背景顏色
 
