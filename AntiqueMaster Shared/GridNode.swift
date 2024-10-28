@@ -12,9 +12,7 @@
 
 import Foundation
 import SpriteKit
-
-
-
+ 
 class GridScene: SKScene {
     var gridNode: GridNode!
     
