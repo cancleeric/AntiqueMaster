@@ -3,15 +3,17 @@
 
 https://github.com/cancleeric/AntiqueMaster.git
 
-Notes:
-- Core logic for role assignment, voting, and round management completed.
-- Images are dynamically scaled to fit the screen.
+    •    圖片會根據螢幕尺寸動態縮放以適應不同設備。
+    •    安全區域內距處理完成，確保了 UI 元素不會被劉海或系統 UI 遮擋。
+    •    針對不同螢幕尺寸的佈局優化已完成，尤其是直立模式下的顯示效果。
 
 TODO:
-- Handle safe area insets to ensure UI elements are not obstructed by notches or system UI.
-- Refine the layout for different screen sizes, especially in vertical mode.
-- Implement local multiplayer support using Bluetooth/Wi-Fi.
-- Add more characters and extend game logic to support them."
+
+    1.    本地多玩家支持：透過藍牙或 Wi-Fi 實現本地多人遊戲，讓多個設備連線共同遊玩。
+    2.    新增角色與擴展遊戲邏輯：增加更多角色選項，並支持新的角色技能，豐富遊戲深度和策略性。
+    3.    優化音效與背景音樂：增加符合遊戲氛圍的背景音樂與互動音效，以增強玩家沉浸感。
+    4.    增加遊戲數據持久化：允許保存遊戲進度與玩家數據，讓玩家可以在退出後繼續遊戲並查看數據回顧。
+
 
 關於 AntiqueMaster 的開發，你可以考慮以下幾個進展方向，具體取決於目前的應用功能和規則的實現進度：
 
@@ -88,15 +90,29 @@ AntiqueMaster 是一款專為桌遊《古董的欺詐 - 十二生肖銅像》設
 - **圖像縮放與佈局**：使用 `ScaledSpriteNode` 類別，繼承自 `SKSpriteNode`，實現圖片的等比縮放與佈局。
 - **佈局管理**：使用 `VStackNode` 和 `HStackNode` 負責將圖片按行列排列，確保銅像在螢幕上均勻顯示。
 
+核心邏輯
+
+    1.    角色分配：應用程式自動為玩家分配角色（例如鑑定者、偽造者），讓遊戲過程更加公平和隨機。
+    2.    回合管理：自動管理遊戲流程的每個階段，確保每位玩家能依次進行操作，並記錄當前回合的進度。
+    3.    投票系統：允許玩家對銅像的真偽進行投票，每回合結束時揭示投票結果，增添策略性。
+
+圖形與佈局管理
+
+    1.    圖像縮放與佈局：使用 ScaledSpriteNode 類別，透過等比縮放功能，讓銅像圖像能夠適應不同設備的螢幕尺寸。
+    2.    佈局管理：利用 VStackNode 和 HStackNode 將銅像進行 3x4 格式的排布，確保圖片在螢幕上均勻顯示
+
 ### 主要類別：
 
-1. **`ScaledSpriteNode`**：繼承自 `SKSpriteNode`，負責根據最大顯示範圍計算並應用等比縮放。
-2. **`VStackNode` 和 `HStackNode`**：用來垂直和水平排列銅像，實現 3x4 的佈局設計。
-
+    •    ScaledSpriteNode：負責圖片的等比縮放，確保圖片能適應不同設備的最大顯示範圍。
+    •    VStackNode 和 HStackNode：用於控制銅像在螢幕上的垂直和水平排列，提供一致的遊戲畫面。
+    •    SafeAreaManager：動態管理安全區域內距，確保所有 UI 元素都在安全區域內可見，特別針對 iPhone 劉海屏設計。
+    •    GameSceneNode：負責在安全區域內容納遊戲節點，讓遊戲中的所有元素都能根據安全區域進行自動調整，減少手動配置。
+    
 ### 使用技術：
 
-- **SpriteKit**：負責遊戲畫面呈現與動態效果。
-- **Swift**：負責邏輯編寫與應用整體開發。
+    •    SpriteKit：處理遊戲畫面呈現、動畫效果以及玩家互動。
+    •    Swift：負責遊戲邏輯和應用開發，提供高效的遊戲管理和 UI 處理。
+    •    Bluetooth/Wi-Fi（計劃中）：支援本地多玩家連線，讓多個玩家可以共同遊玩。
 
 ## 計劃功能（未來更新）
 

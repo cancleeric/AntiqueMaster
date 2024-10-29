@@ -3,8 +3,15 @@
 //  AntiqueMaster Shared
 //
 //  Created by EricWang on 2024/10/19.
+//  Modify: 2024/10/29
+//  - Added `GameSceneNode` class to manage the game elements within the safe area.
+//  - Implemented `setupSize(for:)` method in `GameSceneNode` to calculate available area by excluding safe area insets.
+//  - Added `calculateNodeBounds(for:)` method to define boundaries for `GameSceneNode`.
+//  - Updated `GameScene` class to include `GameSceneNode`, which ensures all elements are positioned within a safe and usable area.
+//  - Refined `layoutStatuesInGrid(...)` method for dynamic grid layout, supporting flexible positioning of statues based on available screen space.
+//  - Improved touch and mouse event handling for both iOS and macOS, adding visual feedback on interactions.
+//  - Additional code comments and documentation for improved readability and maintainability.
 //
-
 import SpriteKit
 
 
@@ -48,9 +55,6 @@ class GameSceneNode: FrameSKNode {
 
     /// 設置 GameSceneNode 的大小，去除安全區域後的可用區域
     func setupSize(for scene: SKScene) {
-        // 獲取 SafeAreaManager 提供的安全區域內的可用寬度和高度
-        let usableWidth = SafeAreaManager.shared.availableWidth
-        let usableHeight = SafeAreaManager.shared.availableHeight
 
         // 計算去除安全區域後的可用區域尺寸
         let safeAreaInsets = SafeAreaManager.shared.safeAreaInsets
@@ -59,41 +63,15 @@ class GameSceneNode: FrameSKNode {
         adjustedSize = CGSize(width: scene.size.width - safeAreaInsetsWidth,
                               height: scene.size.height - safeAreaInsetsHeight)
 
-        // 設置 GameSceneNode 的位置，使其在場景中居中顯示
-//        self.position = CGPoint(x: scene.size.width / 2, y: scene.size.height / 2)
-        
-        // 將 GameSceneNode 的範圍設置為計算後的大小
+
+        // 設置 GameSceneNode 的位置，移動至安全區域中心
+        self.position = CGPoint(x: safeAreaInsets.left + adjustedSize.width / 2,
+                                y: safeAreaInsets.bottom + adjustedSize.height / 2)
+
+        // 將 GameSceneNode 的邊界設置為計算後的大小
         self.calculateNodeBounds(for: adjustedSize)
+
         
-        
-        // 計算畫面上可用的寬度和高度
-        let availableWidth = adjustedSize.width * 0.8 //self.size.width * 0.8  // 使用螢幕寬度的 80%
-        let availableHeight = adjustedSize.height * 0.8 //self.size.height * 0.8  // 使用螢幕高度的 80%
-
-        // 設定元件數：每排3個，每列4排
-        let itemsPerRow = 3
-        let itemsPerColumn = 4
-
-        // 假設每個銅像之間有固定的水平和垂直間距
-        let horizontalSpacing: CGFloat = 20
-        let verticalSpacing: CGFloat = 20
-
-        // 計算每個元件可顯示的最大寬度和高度
-        let maxItemWidth =
-            (availableWidth - CGFloat(itemsPerRow - 1) * horizontalSpacing) / CGFloat(itemsPerRow)
-        let maxItemHeight =
-            (availableHeight - CGFloat(itemsPerColumn - 1) * verticalSpacing)
-            / CGFloat(itemsPerColumn)
-
-        // 使用 VStack 和 HStack 來佈局縮放後的圖片
-        layoutStatuesInGrid(
-            availableWidth: availableWidth,
-            availableHeight: availableHeight,
-            itemsPerRow: itemsPerRow,
-            itemsPerColumn: itemsPerColumn,
-            maxItemSize: CGSize(width: maxItemWidth, height: maxItemHeight),
-            horizontalSpacing: horizontalSpacing,
-            verticalSpacing: verticalSpacing)
     }
 
     /// 計算並設置節點的邊界
@@ -111,42 +89,6 @@ class GameSceneNode: FrameSKNode {
     }
     
     
-    private func layoutStatuesInGrid(
-        availableWidth: CGFloat, availableHeight: CGFloat,
-        itemsPerRow: Int, itemsPerColumn: Int,
-        maxItemSize: CGSize, horizontalSpacing: CGFloat, verticalSpacing: CGFloat
-    ) {
-        
-//        guard let gameSceneNode = gameSceneNode else { return }
-        // 創建 VStackNode，負責垂直排列
-        let vStack = VStackNode(containerHeight: availableHeight)
-//        vStack.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)  // 放在螢幕中央
-        self.addChild(vStack)
-//        gameSceneNode.addChild(vStack)
-
-        // 所有生肖銅像的名稱
-        let zodiacNames = [
-            "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster",
-            "Dog", "Pig",
-        ]
-
-        // 排列圖像
-        for row in 0..<itemsPerColumn {
-            let hStack = HStackNode(containerWidth: availableWidth)  // 每一排的寬度
-
-            for column in 0..<itemsPerRow {
-                let index = row * itemsPerRow + column
-                if index < zodiacNames.count {
-                    let statue = ScaledSpriteNode(
-                        imageNamed: zodiacNames[index], maxSize: maxItemSize)
-                    hStack.addElement(statue)  // 添加到 HStackNode
-                }
-            }
-
-            // 將每一排 (HStack) 添加到 VStack 中
-            vStack.addElement(hStack)
-        }
-    }
 
 }
 
@@ -207,16 +149,82 @@ class GameScene: GridScene {
         guard let gameSceneNode = gameSceneNode else { return }
         
         gameSceneNode.setupSize(for: self)
-        //將 gameSceneNode 置中
-        gameSceneNode.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
-        
-          
 //           將 GameSceneNode 添加到場景中
           self.addChild(gameSceneNode)
         
         self.setUpScene()
         self.backgroundColor = SKColor.white  // 設置背景顏色
+        
+        
+        
+        let adjustedSize = gameSceneNode.adjustedSize
+        // 計算畫面上可用的寬度和高度
+        let availableWidth = adjustedSize.width * 0.8 //self.size.width * 0.8  // 使用螢幕寬度的 80%
+        let availableHeight = adjustedSize.height * 0.8 //self.size.height * 0.8  // 使用螢幕高度的 80%
 
+        // 設定元件數：每排3個，每列4排
+        let itemsPerRow = 3
+        let itemsPerColumn = 4
+
+        // 假設每個銅像之間有固定的水平和垂直間距
+        let horizontalSpacing: CGFloat = 20
+        let verticalSpacing: CGFloat = 20
+
+        // 計算每個元件可顯示的最大寬度和高度
+        let maxItemWidth =
+            (availableWidth - CGFloat(itemsPerRow - 1) * horizontalSpacing) / CGFloat(itemsPerRow)
+        let maxItemHeight =
+            (availableHeight - CGFloat(itemsPerColumn - 1) * verticalSpacing)
+            / CGFloat(itemsPerColumn)
+
+        // 使用 VStack 和 HStack 來佈局縮放後的圖片
+        layoutStatuesInGrid(
+            availableWidth: availableWidth,
+            availableHeight: availableHeight,
+            itemsPerRow: itemsPerRow,
+            itemsPerColumn: itemsPerColumn,
+            maxItemSize: CGSize(width: maxItemWidth, height: maxItemHeight),
+            horizontalSpacing: horizontalSpacing,
+            verticalSpacing: verticalSpacing)
+
+    }
+    
+    
+    private func layoutStatuesInGrid(
+        availableWidth: CGFloat, availableHeight: CGFloat,
+        itemsPerRow: Int, itemsPerColumn: Int,
+        maxItemSize: CGSize, horizontalSpacing: CGFloat, verticalSpacing: CGFloat
+    ) {
+        
+        guard let gameSceneNode = gameSceneNode else { return }
+        // 創建 VStackNode，負責垂直排列
+        let vStack = VStackNode(containerHeight: availableHeight)
+//        vStack.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)  // 放在螢幕中央
+//        self.addChild(vStack)
+        gameSceneNode.addChild(vStack)
+
+        // 所有生肖銅像的名稱
+        let zodiacNames = [
+            "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster",
+            "Dog", "Pig",
+        ]
+
+        // 排列圖像
+        for row in 0..<itemsPerColumn {
+            let hStack = HStackNode(containerWidth: availableWidth)  // 每一排的寬度
+
+            for column in 0..<itemsPerRow {
+                let index = row * itemsPerRow + column
+                if index < zodiacNames.count {
+                    let statue = ScaledSpriteNode(
+                        imageNamed: zodiacNames[index], maxSize: maxItemSize)
+                    hStack.addElement(statue)  // 添加到 HStackNode
+                }
+            }
+
+            // 將每一排 (HStack) 添加到 VStack 中
+            vStack.addElement(hStack)
+        }
     }
 
     func makeSpinny(at pos: CGPoint, color: SKColor) {

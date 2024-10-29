@@ -24,6 +24,7 @@ class GridScene: SKScene {
         gridNode = GridNode(spacing: 100, lineWidth: 2, lineColor: .red) // 可以自定義間距、線條寬度和顏色
         gridNode.prepareNode(size: self.size)
         addChild(gridNode)
+        gridNode.zPosition = -1 // 將網格置於場景的最底層
         
         // 打開 FPS 和節點數顯示，便於檢查場景的性能
         self.view?.showsFPS = true
