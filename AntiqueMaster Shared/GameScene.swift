@@ -4,128 +4,51 @@
 //
 //  Created by EricWang on 2024/10/19.
 //  Modify: 2024/10/29
-//  - Added `GameSceneNode` class to manage the game elements within the safe area.
-//  - Implemented `setupSize(for:)` method in `GameSceneNode` to calculate available area by excluding safe area insets.
-//  - Added `calculateNodeBounds(for:)` method to define boundaries for `GameSceneNode`.
-//  - Updated `GameScene` class to include `GameSceneNode`, which ensures all elements are positioned within a safe and usable area.
-//  - Refined `layoutStatuesInGrid(...)` method for dynamic grid layout, supporting flexible positioning of statues based on available screen space.
-//  - Improved touch and mouse event handling for both iOS and macOS, adding visual feedback on interactions.
-//  - Additional code comments and documentation for improved readability and maintainability.
-//
+//  - 新增 `GameSceneNode` 類別來管理安全區域內的遊戲元素。
+//  - 實現 `setupSize(for:)` 方法來計算去除安全區域後的可用區域。
+//  - 新增 `calculateNodeBounds(for:)` 方法來定義 `GameSceneNode` 的邊界。
+//  - 更新 `GameScene` 類別以包含 `GameSceneNode`，確保所有元素都位於安全且可用的區域內。
+//  - 改進 `layoutStatuesInGrid(...)` 方法以動態網格佈局，支持根據可用屏幕空間靈活定位銅像。
+//  - 改進 iOS 和 macOS 的觸摸和滑鼠事件處理，��加交互的視覺反饋。
+//  - 增加代碼註解和文檔以提高可讀性和可維護性。
+//  - 更新 `assignRolesToPlayers` 方法以支持 8 名玩家。
+//  - 新增 `ZodiacManagerNode` 類別來管理 ZodiacNode 的創建和佈局。
+//  - 新增 `GameRoleLabelManagerNode` 類別來管理玩家角色標籤的創建和佈局。
+//  - 新增 `GameDataCenter` 類別來管理遊戲數據，例如玩家信息。
+
 import SpriteKit
 
-
-protocol CustomFrameCalculable {
-    /// 计算并返回节点的有效框架大小。
-    /// 这应该是考虑到任何遮罩或其他条件后的可见区域的大小。
-    var customFrame: CGRect { get }
-}
-
-/// `FrameSKNode` 是一個自訂的 SKNode 子類別，用來處理節點的邊框與大小
-/// 當節點具有遮罩時，`calculateAccumulatedFrame` 可能無法正確取得節點的大小，因此需要小心處理。
-class FrameSKNode: SKNode {
-    
-    /// 覆寫 frame 屬性，根據是否符合 `CustomFrameCalculable` 協定來決定回傳自訂的框架大小或是使用預設的計算方式。
-    override var frame: CGRect {
-        get {
-            // 檢查當前物件是否符合 CustomFrameCalculable 協定
-            if let selfCustomFrame = self as? CustomFrameCalculable {
-                // 回傳自訂框架大小
-                return selfCustomFrame.customFrame
-            } else {
-                // 若無遮罩則回傳累積計算的框架
-                return self.calculateAccumulatedFrame()
-            }
-        }
-    }
-    
-    /// 顯示節點的邊框，預設顏色為紅色`
-    /// - Parameter color: 邊框顏色，預設為紅色
-    func showBorder(color: UIColor = .red) {
-        // 使用當前節點的大小來建立邊框節點
-        addChild(BorderedNode(size: self.frame.size, borderColor: color))
-    }
-}
-
-
-class GameSceneNode: FrameSKNode {
-
-    /// 新建一個 `size` 成員來存儲計算後的大小
-    var adjustedSize: CGSize = .zero
-
-    /// 設置 GameSceneNode 的大小，去除安全區域後的可用區域
-    func setupSize(for scene: SKScene) {
-
-        // 計算去除安全區域後的可用區域尺寸
-        let safeAreaInsets = SafeAreaManager.shared.safeAreaInsets
-        let safeAreaInsetsWidth = safeAreaInsets.left + safeAreaInsets.right
-        let safeAreaInsetsHeight = safeAreaInsets.top + safeAreaInsets.bottom
-        adjustedSize = CGSize(width: scene.size.width - safeAreaInsetsWidth,
-                              height: scene.size.height - safeAreaInsetsHeight)
-
-
-        // 設置 GameSceneNode 的位置，移動至安全區域中心
-        self.position = CGPoint(x: safeAreaInsets.left + adjustedSize.width / 2,
-                                y: safeAreaInsets.bottom + adjustedSize.height / 2)
-
-        // 將 GameSceneNode 的邊界設置為計算後的大小
-        self.calculateNodeBounds(for: adjustedSize)
-
-        
-    }
-
-    /// 計算並設置節點的邊界
-    private func calculateNodeBounds(for size: CGSize) {
-        // 可以在這裡添加任何設置邊界或背景的邏輯，例如添加一個邊界框
-        let boundary = SKShapeNode(rectOf: size)
-        boundary.strokeColor = .blue // 邊界顏色可自定義
-        boundary.lineWidth = 2
-        self.addChild(boundary)
-    }
-
-    /// 添加子節點至 GameSceneNode
-    func addGameNode(_ node: SKNode) {
-        self.addChild(node)
-    }
-    
-    
-
-}
-
-
+/// 遊戲場景類別，負責管理遊戲中的所有元素和邏輯
 class GameScene: GridScene {
-    
+
     var gameSceneNode: GameSceneNode?
-    
+    var zodiacManagerNode: ZodiacManagerNode?
+    var gameRoleLabelManagerNode: GameRoleLabelManagerNode?
 
     fileprivate var label: SKLabelNode?
     fileprivate var spinnyNode: SKShapeNode?
 
+    /// 創建新的遊戲場景
     class func newGameScene() -> GameScene {
-        // Load 'GameScene.sks' as an SKScene.
         guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
             print("Failed to load GameScene.sks")
             abort()
         }
-
-        // Set the scale mode to scale to fit the window
         scene.scaleMode = .aspectFill
-
         return scene
     }
 
+    /// 設置場景中的元素
     func setUpScene() {
-        // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
             label.alpha = 0.0
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
 
-        // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(
-            rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
+        self.spinnyNode = SKShapeNode(
+            rectOf: CGSize(width: w, height: w), cornerRadius: w * 0.3)
 
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 4.0
@@ -140,93 +63,68 @@ class GameScene: GridScene {
         }
     }
 
+    /// 當場景被添加到視圖時調用
     override func didMove(to view: SKView) {
         super.didMove(to: view)
-        
-        
-        // 創建 GameSceneNode 並設置大小
-          gameSceneNode = GameSceneNode()
+
+        GameDataCenter.shared.initializePlayers(names: [
+            "Player1", "Player2", "Player3", "Player4", "Player5", "Player6", "Player7", "Player8",
+        ])
+        gameSceneNode = GameSceneNode()
         guard let gameSceneNode = gameSceneNode else { return }
-        
+
         gameSceneNode.setupSize(for: self)
-//           將 GameSceneNode 添加到場景中
-          self.addChild(gameSceneNode)
-        
+        self.addChild(gameSceneNode)
+
         self.setUpScene()
-        self.backgroundColor = SKColor.white  // 設置背景顏色
-        
-        
-        
+        self.backgroundColor = SKColor.white
+
         let adjustedSize = gameSceneNode.adjustedSize
-        // 計算畫面上可用的寬度和高度
-        let availableWidth = adjustedSize.width * 0.8 //self.size.width * 0.8  // 使用螢幕寬度的 80%
-        let availableHeight = adjustedSize.height * 0.8 //self.size.height * 0.8  // 使用螢幕高度的 80%
+        let availableWidth = adjustedSize.width * 0.8
+        let availableHeight = adjustedSize.height * 0.8
 
-        // 設定元件數：每排3個，每列4排
-        let itemsPerRow = 3
-        let itemsPerColumn = 4
+        zodiacManagerNode = ZodiacManagerNode()
+        guard let zodiacManagerNode = zodiacManagerNode else { return }
 
-        // 假設每個銅像之間有固定的水平和垂直間距
-        let horizontalSpacing: CGFloat = 20
-        let verticalSpacing: CGFloat = 20
+        zodiacManagerNode.setupZodiacNodes(
+            in: self, availableWidth: availableWidth, availableHeight: availableHeight)
+        gameSceneNode.addChild(zodiacManagerNode)
 
-        // 計算每個元件可顯示的最大寬度和高度
-        let maxItemWidth =
-            (availableWidth - CGFloat(itemsPerRow - 1) * horizontalSpacing) / CGFloat(itemsPerRow)
-        let maxItemHeight =
-            (availableHeight - CGFloat(itemsPerColumn - 1) * verticalSpacing)
-            / CGFloat(itemsPerColumn)
-
-        // 使用 VStack 和 HStack 來佈局縮放後的圖片
-        layoutStatuesInGrid(
-            availableWidth: availableWidth,
-            availableHeight: availableHeight,
-            itemsPerRow: itemsPerRow,
-            itemsPerColumn: itemsPerColumn,
-            maxItemSize: CGSize(width: maxItemWidth, height: maxItemHeight),
-            horizontalSpacing: horizontalSpacing,
-            verticalSpacing: verticalSpacing)
-
+        assignRolesToPlayers()
     }
-    
-    
-    private func layoutStatuesInGrid(
-        availableWidth: CGFloat, availableHeight: CGFloat,
-        itemsPerRow: Int, itemsPerColumn: Int,
-        maxItemSize: CGSize, horizontalSpacing: CGFloat, verticalSpacing: CGFloat
-    ) {
-        
-        guard let gameSceneNode = gameSceneNode else { return }
-        // 創建 VStackNode，負責垂直排列
-        let vStack = VStackNode(containerHeight: availableHeight)
-//        vStack.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)  // 放在螢幕中央
-//        self.addChild(vStack)
-        gameSceneNode.addChild(vStack)
 
-        // 所有生肖銅像的名稱
-        let zodiacNames = [
-            "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster",
-            "Dog", "Pig",
+    /// 分配角色給玩家
+    func assignRolesToPlayers() {
+        var roles: [GameRole] = [
+            .appraiser, .appraiser, .forger, .forger, .appraiser, .appraiser, .forger, .forger,
         ]
+        roles.shuffle()
 
-        // 排列圖像
-        for row in 0..<itemsPerColumn {
-            let hStack = HStackNode(containerWidth: availableWidth)  // 每一排的寬度
-
-            for column in 0..<itemsPerRow {
-                let index = row * itemsPerRow + column
-                if index < zodiacNames.count {
-                    let statue = ScaledSpriteNode(
-                        imageNamed: zodiacNames[index], maxSize: maxItemSize)
-                    hStack.addElement(statue)  // 添加到 HStackNode
-                }
-            }
-
-            // 將每一排 (HStack) 添加到 VStack 中
-            vStack.addElement(hStack)
+        for i in 0..<GameDataCenter.shared.players.count {
+            GameDataCenter.shared.players[i].role = roles[i % roles.count]
         }
+
+        displayPlayerRoles()
     }
 
+    /// 顯示玩家角色
+    func displayPlayerRoles() {
+        guard let gameSceneNode = gameSceneNode else {
+            print("Error: gameSceneNode is nil")
+            return
+        }
+
+        let adjustedSize = gameSceneNode.adjustedSize
+
+        gameRoleLabelManagerNode = GameRoleLabelManagerNode()
+        guard let gameRoleLabelManagerNode = gameRoleLabelManagerNode else { return }
+
+        gameRoleLabelManagerNode.setupPlayerRoleLabels(
+            players: GameDataCenter.shared.players, adjustedSize: adjustedSize)
+        gameSceneNode.addChild(gameRoleLabelManagerNode)
+    }
+
+    /// 創建旋轉節點
     func makeSpinny(at pos: CGPoint, color: SKColor) {
         if let spinny = self.spinnyNode?.copy() as! SKShapeNode? {
             spinny.position = pos
@@ -235,13 +133,14 @@ class GameScene: GridScene {
         }
     }
 
+    /// 每幀渲染前調用
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
 }
 
 #if os(iOS) || os(tvOS)
-    // Touch-based event handling
+    // 基於觸摸的事件處理
     extension GameScene {
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -270,28 +169,6 @@ class GameScene: GridScene {
             for t in touches {
                 self.makeSpinny(at: t.location(in: self), color: SKColor.red)
             }
-        }
-
-    }
-#endif
-
-#if os(OSX)
-    // Mouse-based event handling
-    extension GameScene {
-
-        override func mouseDown(with event: NSEvent) {
-            if let label = self.label {
-                label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-            }
-            self.makeSpinny(at: event.location(in: self), color: SKColor.green)
-        }
-
-        override func mouseDragged(with event: NSEvent) {
-            self.makeSpinny(at: event.location(in: self), color: SKColor.blue)
-        }
-
-        override func mouseUp(with event: NSEvent) {
-            self.makeSpinny(at: event.location(in: self), color: SKColor.red)
         }
 
     }

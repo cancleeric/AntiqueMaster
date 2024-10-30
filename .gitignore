@@ -43,6 +43,35 @@ Pods/
 DerivedData/
 build/
 
+# Google Service Info
 GoogleService-Info.plist
+
+# Logs and temporary files
 *.log
 *.tmp
+
+# Environment variables
+.env
+
+# Compiled object files
+*.o
+*.a
+*.so
+
+# Compiler intermediate files
+*.d
+
+# Test output
+test-results/
+
+# Temporary files
+*.swp
+*.swo
+
+# Other IDE files
+.idea/
+.vscode/
+
+# Other package managers
+.yarn/
+.pnp.*
