@@ -36,12 +36,39 @@ class GameViewController: UIViewController {
                 left: safeAreaInsets.left,
                 right: safeAreaInsets.right
             )
+        }
+        
+        
+        // 設置初始視圖
+        let initialView = SKScene(size: self.view.bounds.size)
+        initialView.backgroundColor = SKColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)  // 設置與 LaunchScreen 相同的背景色
 
-            // 更新場景大小或位置
-            setupScene()
-            // 根據更新的安全區域重新設置場景大小或位置
-            //                adjustSceneForSafeArea()
+  
+        // 添加 logo 圖像
+        let logoImage = SKSpriteNode(imageNamed: "logoImage")
+        logoImage.size = CGSize(width: 100, height: 100)  // 設置圖像大小為 100x100
+        logoImage.position = CGPoint(x: initialView.size.width / 2, y: initialView.size.height / 2 )  // 設置位置在中心
+        initialView.addChild(logoImage)
 
+        
+        // 添加文字標籤
+        let label = SKLabelNode(text: "古董的欺詐")
+        label.fontSize = 37
+        label.fontColor = .black
+        label.horizontalAlignmentMode = .center  // 設置水平置中
+        label.position = CGPoint(x: initialView.size.width / 2, y: initialView.size.height / 2 - logoImage.size.height )
+        initialView.addChild(label)
+
+        let skView = self.view as! SKView
+        skView.presentScene(initialView)
+
+        skView.ignoresSiblingOrder = true
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+
+        // 延遲切換到遊戲場景
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//            self.transitionToGameScene()
         }
     }
 
@@ -105,5 +132,10 @@ class GameViewController: UIViewController {
     // 隱藏狀態列
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+
+    /// 切換到遊戲場景
+    private func transitionToGameScene() {
+        setupScene()
     }
 }
