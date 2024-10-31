@@ -9,7 +9,7 @@ class DevelopmentNode: SKNode {
     private var availableWidth: CGFloat = 0.0
     private var availableHeight: CGFloat = 0.0
 
-    func setupNodes(in scene: SKScene, availableWidth: CGFloat, availableHeight: CGFloat) {
+    func setupNodes(availableWidth: CGFloat, availableHeight: CGFloat) {
         self.availableWidth = availableWidth
         self.availableHeight = availableHeight
 
@@ -29,7 +29,7 @@ class DevelopmentNode: SKNode {
         self.addChild(gameRoleLabelManagerNode)
 
         // 設置旋轉節點
-        let w = (scene.size.width + scene.size.height) * 0.05
+        let w = (availableWidth + availableHeight) * 0.05
         self.spinnyNode = SKShapeNode(
             rectOf: CGSize(width: w, height: w), cornerRadius: w * 0.3)
 

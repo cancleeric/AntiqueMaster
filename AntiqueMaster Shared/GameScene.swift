@@ -67,8 +67,8 @@ class GameScene: GridScene {
         guard let developmentNode = developmentNode else { return }
 
         developmentNode.setupNodes(
-            in: self, availableWidth: adjustedSize.width, availableHeight: adjustedSize.height)
-        gameSceneNode.addChild(developmentNode)
+            availableWidth: adjustedSize.width, availableHeight: adjustedSize.height)
+//                gameSceneNode.addChild(developmentNode)
 
         developmentNode.assignRolesToPlayers()
     }
