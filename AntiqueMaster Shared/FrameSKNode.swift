@@ -9,7 +9,6 @@ protocol CustomFrameCalculable {
 /// `FrameSKNode` 是一個自訂的 SKNode 子類別，用來處理節點的邊框與大小
 /// 當節點具有遮罩時，`calculateAccumulatedFrame` 可能無法正確取得節點的大小，因此需要小心處理。
 class FrameSKNode: SKNode {
-
     /// 覆寫 frame 屬性，根據是否符合 `CustomFrameCalculable` 協定來決定回傳自訂的框架大小或是使用預設的計算方式。
     override var frame: CGRect {
         // 檢查當前物件是否符合 CustomFrameCalculable 協定

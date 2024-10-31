@@ -10,35 +10,38 @@ import SpriteKit
 //  base button  ， 有基本的使用者輸入，有基本的動畫
 class ButtonNode: AnimatedSKNode, CancelableTouch {
     var action: (() -> Void)?
-    
+
+    var size: CGSize = .zero
+
     var disabled: Bool = false {
-            didSet {
-                // 更新按鈕的外觀或行為
-                self.isUserInteractionEnabled = !disabled
-                
-                if disabled {
-                    setDisabledColors()
-                } else {
-                    setEnabledColors()
-                }
+        didSet {
+            // 更新按鈕的外觀或行為
+            self.isUserInteractionEnabled = !disabled
+
+            if disabled {
+                setDisabledColors()
+            } else {
+                setEnabledColors()
             }
         }
-    
+    }
+
     func setDisabledColors() {}
     func setEnabledColors() {}
-     
+
+    // 初始化方法
     override init() {
         super.init()
         isUserInteractionEnabled = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private var initialTouchPoint: CGPoint = .zero
     private var hasMoved: Bool = false
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             initialTouchPoint = touch.location(in: self)
@@ -50,7 +53,9 @@ class ButtonNode: AnimatedSKNode, CancelableTouch {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let currentTouchPoint = touch.location(in: self)
-            let distance = sqrt(pow((currentTouchPoint.x - initialTouchPoint.x), 2) + pow((currentTouchPoint.y - initialTouchPoint.y), 2))
+            let distance = sqrt(
+                pow((currentTouchPoint.x - initialTouchPoint.x), 2)
+                    + pow((currentTouchPoint.y - initialTouchPoint.y), 2))
             if distance > 5 {
                 stopAllAnimations()
                 hasMoved = true
@@ -62,19 +67,17 @@ class ButtonNode: AnimatedSKNode, CancelableTouch {
         if !hasMoved {
             // 呼叫外部提供的回調函數
             DebugLogger.debug(" ButtonNode touchesEnded ")
-            
+
             removeAllActions()
-            animateToLarge() {
+            animateToLarge {
                 self.action?()
             }
-
         }
-        
+
         hasMoved = false
     }
-    
+
     func touchCancelled() {
         stopAllAnimations()
     }
 }
-

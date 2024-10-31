@@ -9,34 +9,8 @@
 //  - 2024/10/22: 增加了 GridScene 類別，用來管理場景中的 GridNode。
 //  - 2024/10/22: 修改 prepareNode 方法，使其能夠依據不同解析度動態調整網格和標籤的大小與位置。
 
-
 import Foundation
 import SpriteKit
- 
-class GridScene: SKScene {
-    var gridNode: GridNode!
-    
-    override func didMove(to view: SKView) {
-        // 設置背景顏色
-        self.backgroundColor = SKColor.black
-        
-        // 創建 GridNode 並添加到場景中
-        gridNode = GridNode(spacing: 100, lineWidth: 2, lineColor: .red) // 可以自定義間距、線條寬度和顏色
-        gridNode.prepareNode(size: self.size)
-        addChild(gridNode)
-        gridNode.zPosition = -1 // 將網格置於場景的最底層
-        
-        // 打開 FPS 和節點數顯示，便於檢查場景的性能
-        self.view?.showsFPS = true
-        self.view?.showsNodeCount = true
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // 點擊螢幕時，切換網格的可見性
-        gridNode.toggleVisibility()
-    }
-}
-
 
 /// `GridNode` 類別負責在場景中繪製網格，支援調整間距、線條寬度和顏色。
 /// 可以用來輔助 UI 佈局或測試座標系統。
@@ -79,7 +53,7 @@ class GridNode: SKNode {
 
         // 根據場景大小動態調整網格的間距和字體大小
         let dynamicSpacing = max(50, size.width / 10)  // 根據螢幕寬度設定間距，最小為 50
-        let dynamicFontSize = max(12, size.width / 30) // 根據螢幕寬度設定字體大小，最小為 12
+        let dynamicFontSize = max(12, size.width / 30)  // 根據螢幕寬度設定字體大小，最小為 12
 
         // 繪製水平網格線
         for i in stride(from: 0, through: size.height, by: dynamicSpacing) {
@@ -126,7 +100,7 @@ class GridNode: SKNode {
         // 設置透明度以顯示網格的可見性
         alpha = 0.5
     }
-    
+
     /// 切換網格的可見性
     func toggleVisibility() {
         self.isHidden = !self.isHidden

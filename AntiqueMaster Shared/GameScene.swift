@@ -15,6 +15,7 @@
 //  - 新增 `ZodiacManagerNode` 類別來管理 ZodiacNode 的創建和佈局。
 //  - 新增 `GameRoleLabelManagerNode` 類別來管理玩家角色標籤的創建和佈局。
 //  - 新增 `GameDataCenter` 類別來管理遊戲數據，例如玩家信息。
+//  - 集成 `GameHomeNode` 以管理遊戲首頁的 UI 元素。
 
 import SpriteKit
 
@@ -23,6 +24,7 @@ class GameScene: GridScene {
 
     var gameSceneNode: GameSceneNode?
     var developmentNode: DevelopmentNode?  // 新增開發用的NODE
+    var gameHomeNode: GameHomeNode?  // 新增遊戲首頁 NODE
 
     fileprivate var label: SKLabelNode?
 
@@ -68,9 +70,16 @@ class GameScene: GridScene {
 
         developmentNode.setupNodes(
             availableWidth: adjustedSize.width, availableHeight: adjustedSize.height)
-//                gameSceneNode.addChild(developmentNode)
+        // gameSceneNode.addChild(developmentNode)
 
         developmentNode.assignRolesToPlayers()
+
+        // Initialize and add GameHomeNode
+        gameHomeNode = GameHomeNode()
+        guard let gameHomeNode = gameHomeNode else { return }
+        gameHomeNode.setupNodes(
+            availableWidth: adjustedSize.width, availableHeight: adjustedSize.height)
+        gameSceneNode.addGameNode(gameHomeNode)
     }
 
     /// 每幀渲染前調用

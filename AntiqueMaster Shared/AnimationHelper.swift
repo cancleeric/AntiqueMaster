@@ -12,16 +12,7 @@ class AnimationHelper: AnimatedSKNode {
     // 使用static let确保这个shared实例是唯一的，并且是懒加载的
     static let shared = AnimationHelper()
     
-    // 重写init方法，如果需要的话，可以在这里进行一些初始化设置
-    private override init() {
-        super.init()
-        // 这里添加任何特定的初始化代码
-    }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     // 你可以在这个类中添加更多的方法，或者重写AnimatedSKNode的方法来满足特定的需求
     // 例如，扩展animateNode方法来为外部节点提供动画服务
     func animateNode(_ node: SKNode, movementAndFade distance: CGFloat, duration: TimeInterval, direction: MovementDirection, fadeOut: Bool, completion: (() -> Void)? = nil) {

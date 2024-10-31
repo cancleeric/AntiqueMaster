@@ -7,11 +7,8 @@
 
 import SpriteKit
 
-class BorderedNode: FrameSKNode {
-
-    // 矩形的尺寸
-    var size: CGSize
-
+class BorderedNode: SKSpriteNode {
+    
     // 圆角半径
     var cornerRadius: CGFloat
 
@@ -20,9 +17,9 @@ class BorderedNode: FrameSKNode {
         size: CGSize = CGSize(width: 100, height: 100), cornerRadius: CGFloat = 20,
         lineWidth: CGFloat = 4, fillColor: SKColor = SKColor.clear, borderColor: SKColor = .red
     ) {
-        self.size = size
+        
         self.cornerRadius = cornerRadius
-        super.init()
+        super.init(texture: nil, color: .clear, size: size)
 
         // 创建一个CGPath表示圆角矩形
         let path = CGPath(
