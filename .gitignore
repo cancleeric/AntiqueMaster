@@ -75,3 +75,15 @@ test-results/
 # Other package managers
 .yarn/
 .pnp.*
+
+# Additional Recommendations
+# Ignore API keys and certificates
+*.key
+*.cert
+
+# Ignore custom script outputs
+scripts/output/
+scripts/logs/
+
+# Ignore coverage reports
+coverage/

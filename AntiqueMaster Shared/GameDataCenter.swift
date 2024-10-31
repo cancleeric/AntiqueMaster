@@ -19,4 +19,11 @@ class GameDataCenter {
     func initializePlayers(names: [String]) {
         players = names.map { Player(name: $0) }
     }
+
+    /// 初始化遊戲數據中心
+    func initializeGameDataCenter() {
+        self.initializePlayers(names: [
+            "Player1", "Player2", "Player3", "Player4", "Player5", "Player6", "Player7", "Player8",
+        ])
+    }
 }

@@ -17,7 +17,7 @@ class ZodiacManagerNode: SKNode {
     let verticalSpacing: CGFloat = 20
 
     /// 設置 Zodiac 節點
-    func setupZodiacNodes(in scene: SKScene, availableWidth: CGFloat, availableHeight: CGFloat) {
+    func setupZodiacNodes(availableWidth: CGFloat, availableHeight: CGFloat) {
         let maxItemWidth =
             (availableWidth - CGFloat(itemsPerRow - 1) * horizontalSpacing) / CGFloat(itemsPerRow)
         let maxItemHeight =

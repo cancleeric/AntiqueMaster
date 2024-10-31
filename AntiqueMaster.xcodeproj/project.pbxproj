@@ -25,6 +25,7 @@
 				Assets.xcassets,
 				BorderedNode.swift,
 				DebugLogger.swift,
+				DevelopmentNode.swift,
 				DeviceLayer.swift,
 				FrameSKNode.swift,
 				GameDataCenter.swift,
@@ -32,12 +33,12 @@
 				GameRoleLabelManagerNode.swift,
 				GameScene.sks,
 				GameScene.swift,
-				GameSceneNode.swift,
 				GridNode.swift,
-				HStackNode.swift,
+				Nodes/GameSceneNode.swift,
+				Nodes/HStackNode.swift,
+				Nodes/VStackNode.swift,
 				SafeAreaManager.swift,
 				ScaledSpriteNode.swift,
-				VStackNode.swift,
 				ZodiacManagerNode.swift,
 				ZodiacNode.swift,
 				ZodiacStatue.swift,
@@ -86,13 +87,13 @@
 		186442082CC3E6AC00C0CDB5 = {
 			isa = PBXGroup;
 			children = (
-				186442512CC401CD00C0CDB5 /* LICENSE */,
-				1864424F2CC3FDC900C0CDB5 /* README.md */,
-				1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */,
 				186442182CC3E6AE00C0CDB5 /* AntiqueMaster iOS */,
 				186442282CC3E6AE00C0CDB5 /* AntiqueMaster macOS */,
+				1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */,
 				18E5D39E2CC5510B008425A0 /* AntiqueMasterTests */,
+				186442512CC401CD00C0CDB5 /* LICENSE */,
 				186442172CC3E6AE00C0CDB5 /* Products */,
+				1864424F2CC3FDC900C0CDB5 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,7 +138,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					186442152CC3E6AE00C0CDB5 = {
 						CreatedOnToolsVersion = 16.0;

@@ -9,8 +9,8 @@
 //  - 新增 `calculateNodeBounds(for:)` 方法來定義 `GameSceneNode` 的邊界。
 //  - 更新 `GameScene` 類別以包含 `GameSceneNode`，確保所有元素都位於安全且可用的區域內。
 //  - 改進 `layoutStatuesInGrid(...)` 方法以動態網格佈局，支持根據可用屏幕空間靈活定位銅像。
-//  - 改進 iOS 和 macOS 的觸摸和滑鼠事件處理，��加交互的視覺反饋。
-//  - 增加代碼註解和文檔以提高可讀性和可維護性。
+//  - 改進 iOS 和 macOS 的觸摸和滑鼠事件處理，增加交互的視覺反饋。
+//  - 增加代碼註解和文檋以提高可讀性和可維護性。
 //  - 更新 `assignRolesToPlayers` 方法以支持 8 名玩家。
 //  - 新增 `ZodiacManagerNode` 類別來管理 ZodiacNode 的創建和佈局。
 //  - 新增 `GameRoleLabelManagerNode` 類別來管理玩家角色標籤的創建和佈局。
@@ -22,11 +22,9 @@ import SpriteKit
 class GameScene: GridScene {
 
     var gameSceneNode: GameSceneNode?
-    var zodiacManagerNode: ZodiacManagerNode?
-    var gameRoleLabelManagerNode: GameRoleLabelManagerNode?
+    var developmentNode: DevelopmentNode?  // 新增開發用的NODE
 
     fileprivate var label: SKLabelNode?
-    fileprivate var spinnyNode: SKShapeNode?
 
     /// 創建新的遊戲場景
     class func newGameScene() -> GameScene {
@@ -46,30 +44,30 @@ class GameScene: GridScene {
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
 
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode(
-            rectOf: CGSize(width: w, height: w), cornerRadius: w * 0.3)
+        // 移除旋轉節點的設置
+        // let w = (self.size.width + self.size.height) * 0.05
+        // self.spinnyNode = SKShapeNode(
+        //     rectOf: CGSize(width: w, height: w), cornerRadius: w * 0.3)
 
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 4.0
-            spinnyNode.run(
-                SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(
-                SKAction.sequence([
-                    SKAction.wait(forDuration: 0.5),
-                    SKAction.fadeOut(withDuration: 0.5),
-                    SKAction.removeFromParent(),
-                ]))
-        }
+        // if let spinnyNode = self.spinnyNode {
+        //     spinnyNode.lineWidth = 4.0
+        //     spinnyNode.run(
+        //         SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
+        //     spinnyNode.run(
+        //         SKAction.sequence([
+        //             SKAction.wait(forDuration: 0.5),
+        //             SKAction.fadeOut(withDuration: 0.5),
+        //             SKAction.removeFromParent(),
+        //         ]))
+        // }
     }
 
     /// 當場景被添加到視圖時調用
     override func didMove(to view: SKView) {
         super.didMove(to: view)
 
-        GameDataCenter.shared.initializePlayers(names: [
-            "Player1", "Player2", "Player3", "Player4", "Player5", "Player6", "Player7", "Player8",
-        ])
+        GameDataCenter.shared.initializeGameDataCenter()  // 初始化遊戲數據中心
+
         gameSceneNode = GameSceneNode()
         guard let gameSceneNode = gameSceneNode else { return }
 
@@ -80,58 +78,26 @@ class GameScene: GridScene {
         self.backgroundColor = SKColor.white
 
         let adjustedSize = gameSceneNode.adjustedSize
-        let availableWidth = adjustedSize.width * 0.8
-        let availableHeight = adjustedSize.height * 0.8
 
-        zodiacManagerNode = ZodiacManagerNode()
-        guard let zodiacManagerNode = zodiacManagerNode else { return }
+        developmentNode = DevelopmentNode()
+        guard let developmentNode = developmentNode else { return }
 
-        zodiacManagerNode.setupZodiacNodes(
-            in: self, availableWidth: availableWidth, availableHeight: availableHeight)
-        gameSceneNode.addChild(zodiacManagerNode)
+        developmentNode.setupNodes(
+            in: self, availableWidth: adjustedSize.width, availableHeight: adjustedSize.height)
+        gameSceneNode.addChild(developmentNode)
 
-        assignRolesToPlayers()
+        developmentNode.assignRolesToPlayers()
     }
 
-    /// 分配角色給玩家
-    func assignRolesToPlayers() {
-        var roles: [GameRole] = [
-            .appraiser, .appraiser, .forger, .forger, .appraiser, .appraiser, .forger, .forger,
-        ]
-        roles.shuffle()
-
-        for i in 0..<GameDataCenter.shared.players.count {
-            GameDataCenter.shared.players[i].role = roles[i % roles.count]
-        }
-
-        displayPlayerRoles()
-    }
-
-    /// 顯示玩家角色
-    func displayPlayerRoles() {
-        guard let gameSceneNode = gameSceneNode else {
-            print("Error: gameSceneNode is nil")
-            return
-        }
-
-        let adjustedSize = gameSceneNode.adjustedSize
-
-        gameRoleLabelManagerNode = GameRoleLabelManagerNode()
-        guard let gameRoleLabelManagerNode = gameRoleLabelManagerNode else { return }
-
-        gameRoleLabelManagerNode.setupPlayerRoleLabels(
-            players: GameDataCenter.shared.players, adjustedSize: adjustedSize)
-        gameSceneNode.addChild(gameRoleLabelManagerNode)
-    }
-
-    /// 創建旋轉節點
-    func makeSpinny(at pos: CGPoint, color: SKColor) {
-        if let spinny = self.spinnyNode?.copy() as! SKShapeNode? {
-            spinny.position = pos
-            spinny.strokeColor = color
-            self.addChild(spinny)
-        }
-    }
+    // 移除 makeSpinny 方法
+    // /// 創建旋轉節點
+    // func makeSpinny(at pos: CGPoint, color: SKColor) {
+    //     if let spinny = self.spinnyNode?.copy() as! SKShapeNode? {
+    //         spinny.position = pos
+    //         spinny.strokeColor = color
+    //         self.addChild(spinny)
+    //     }
+    // }
 
     /// 每幀渲染前調用
     override func update(_ currentTime: TimeInterval) {
@@ -149,25 +115,25 @@ class GameScene: GridScene {
             }
 
             for t in touches {
-                self.makeSpinny(at: t.location(in: self), color: SKColor.green)
+                developmentNode?.makeSpinny(at: t.location(in: self), color: SKColor.green)
             }
         }
 
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
             for t in touches {
-                self.makeSpinny(at: t.location(in: self), color: SKColor.blue)
+                developmentNode?.makeSpinny(at: t.location(in: self), color: SKColor.blue)
             }
         }
 
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             for t in touches {
-                self.makeSpinny(at: t.location(in: self), color: SKColor.red)
+                developmentNode?.makeSpinny(at: t.location(in: self), color: SKColor.red)
             }
         }
 
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
             for t in touches {
-                self.makeSpinny(at: t.location(in: self), color: SKColor.red)
+                developmentNode?.makeSpinny(at: t.location(in: self), color: SKColor.red)
             }
         }
 
