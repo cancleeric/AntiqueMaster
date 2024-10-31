@@ -44,22 +44,6 @@ class GameScene: GridScene {
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
 
-        // 移除旋轉節點的設置
-        // let w = (self.size.width + self.size.height) * 0.05
-        // self.spinnyNode = SKShapeNode(
-        //     rectOf: CGSize(width: w, height: w), cornerRadius: w * 0.3)
-
-        // if let spinnyNode = self.spinnyNode {
-        //     spinnyNode.lineWidth = 4.0
-        //     spinnyNode.run(
-        //         SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-        //     spinnyNode.run(
-        //         SKAction.sequence([
-        //             SKAction.wait(forDuration: 0.5),
-        //             SKAction.fadeOut(withDuration: 0.5),
-        //             SKAction.removeFromParent(),
-        //         ]))
-        // }
     }
 
     /// 當場景被添加到視圖時調用
@@ -88,16 +72,6 @@ class GameScene: GridScene {
 
         developmentNode.assignRolesToPlayers()
     }
-
-    // 移除 makeSpinny 方法
-    // /// 創建旋轉節點
-    // func makeSpinny(at pos: CGPoint, color: SKColor) {
-    //     if let spinny = self.spinnyNode?.copy() as! SKShapeNode? {
-    //         spinny.position = pos
-    //         spinny.strokeColor = color
-    //         self.addChild(spinny)
-    //     }
-    // }
 
     /// 每幀渲染前調用
     override func update(_ currentTime: TimeInterval) {
