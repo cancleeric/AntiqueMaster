@@ -3,48 +3,25 @@
 //  AntiqueMaster
 //
 //  Created by EricWang on 2024/10/19.
-//
+//  修改於 2024/11/01：新增 spacing 和 padding 屬性，並調整 layoutElements 方法以支援 SpacerNode。
 
 import SpriteKit
 
-class VStackNode: SKSpriteNode {
-
-    // 元件數組
-    private var elements: [SKNode] = []
-    private var spacing: CGFloat = 0  // 默認的 間距，可以動態調整
+class VStackNode: StackNode {
     private var totalHeight: CGFloat = 0  // 容器的 總高度
-    private var padding: CGFloat = 0  // 默認的 padding，可以動態調整
 
     // 初始化，設置容器高度、間距和 padding
     init(containerHeight: CGFloat, spacing: CGFloat = 0, padding: CGFloat = 0) {
         self.totalHeight = containerHeight
-        self.spacing = spacing
-        self.padding = padding
-        super.init(texture: nil, color: .clear, size: CGSize(width: 0, height: containerHeight))
+        super.init(spacing: spacing, padding: padding)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    // 新增單個元件到 VStackNode，並重新計算排列
-    func addElement(_ element: SKNode) {
-        elements.append(element)
-        self.addChild(element)
-        layoutElements()  // 每次添加完後重新計算位置
-    }
-
-    // 支援新增多個元件（陣列）到 VStackNode
-    func addElements(_ elementsArray: [SKNode]) {
-        elements.append(contentsOf: elementsArray)  // 添加陣列中的所有元素
-        for element in elementsArray {
-            self.addChild(element)
-        }
-        layoutElements()  // 添加完後重新計算位置
-    }
-
     // 重新計算所有元件的位置與縮放
-    private func layoutElements() {
+    override func layoutElements() {
         var totalElementHeight: CGFloat = 0
         var spacerCount: Int = 0
 

@@ -25,6 +25,8 @@ class FrameSKNode: SKNode {
     /// - Parameter color: 邊框顏色，預設為紅色
     func showBorder(color: UIColor = .red) {
         // 使用當前節點的大小來建立邊框節點
-        addChild(BorderedNode(size: self.frame.size, borderColor: color))
+        let borderedNode = BorderedNode(size: self.frame.size, borderColor: color)
+        addChild(borderedNode)
+        borderedNode.zPosition = self.zPosition -  1
     }
 }
