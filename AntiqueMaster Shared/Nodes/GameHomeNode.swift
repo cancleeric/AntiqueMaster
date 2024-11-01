@@ -28,7 +28,7 @@ class GameHomeNode: SKNode {
             fontSize: 48,
             fontColor: .white,
             outlineColor: .black,
-            outlineWidth: 2
+            outlineWidth: 1
         )
         guard let playerNameLabel = playerNameLabel else { return }
 
