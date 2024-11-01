@@ -7,17 +7,20 @@
 
 import SpriteKit
 
-class HStackNode: FrameSKNode {
+class HStackNode: SKSpriteNode {
 
     // 元件數組
     private var elements: [SKNode] = []
     private var spacing: CGFloat = 0  // 默認的 間距，可以動態調整
     private var totalWidth: CGFloat = 0  // 容器的 總寬度
+    private var padding: CGFloat = 0  // 默認的 padding，可以動態調整
 
-    // 初始化，設置容器寬度
-    init(containerWidth: CGFloat) {
-        super.init()
+    // 初始化，設置容器寬度、間距和 padding
+    init(containerWidth: CGFloat, spacing: CGFloat = 0, padding: CGFloat = 0) {
         self.totalWidth = containerWidth
+        self.spacing = spacing
+        self.padding = padding
+        super.init(texture: nil, color: .clear, size: CGSize(width: containerWidth, height: 1))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -28,7 +31,7 @@ class HStackNode: FrameSKNode {
     func addElement(_ element: SKNode) {
         elements.append(element)
         self.addChild(element)
-        layoutElements()  // 每次添加完後重新計 算位置
+        layoutElements()  // 每次添加完後重新計算位置
     }
 
     // 支援新增多個元件（陣列）到 HStackNode
@@ -42,29 +45,34 @@ class HStackNode: FrameSKNode {
 
     // 重新計算所有元件的位置與縮放
     private func layoutElements() {
-        var totalElementWidth: CGFloat = 0
+        var currentX = -totalWidth / 2 + padding
+        var totalFixedWidth: CGFloat = 0
+        var spacerCount: Int = 0
 
-        // 計算所有元件的原始總寬度
+        // 計算固定寬度的元素總寬度和 SpacerNode 的數量
         for element in elements {
-            totalElementWidth += element.frame.width
+            if element is SpacerNode {
+                spacerCount += 1
+            } else {
+                totalFixedWidth += element.frame.width
+            }
         }
 
-        // 計算剩餘空間，並將其均分為間距
-        let totalSpacing = totalWidth - totalElementWidth
-        if elements.count > 1 {
-            spacing = totalSpacing / CGFloat(elements.count - 1)
-        } else {
-            spacing = 0  // 如果只有一個元件，間距為0
-        }
+        // 計算每個 SpacerNode 的寬度
+        let totalSpacing = CGFloat(elements.count - 1) * spacing
+        let availableWidth = totalWidth - padding * 2 - totalFixedWidth - totalSpacing
+        let spacerWidth = spacerCount > 0 ? availableWidth / CGFloat(spacerCount) : 0
 
-        // 設定起始 x 位置，從左至右依次排列，讓所有元件均勻排列
-        var currentX: CGFloat = -totalWidth / 2
-
-        // 重新排列所有元件，並調整每個元件的 x 位置
+        // 重新排列所有元素
         for element in elements {
-            // 計算每個元件的位置
-            element.position = CGPoint(x: currentX + element.frame.width / 2, y: 0)
-            currentX += element.frame.width + spacing
+            if let spacer = element as? SpacerNode {
+                spacer.size.width = spacerWidth
+                spacer.position = CGPoint(x: currentX + spacer.size.width / 2, y: 0)
+                currentX += spacer.size.width + spacing
+            } else {
+                element.position = CGPoint(x: currentX + element.frame.width / 2, y: 0)
+                currentX += element.frame.width + spacing
+            }
         }
     }
 }
