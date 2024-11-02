@@ -16,7 +16,7 @@ import SpriteKit
 ///    - fontColor: 文字的顏色。
 ///    - outlineColor: 文字輪廓的顏色。
 ///    - outlineWidth: 輪廓的寬度（默認為 1）。
-class ImageOutlinedTextNode: AnimatedSKNode {
+class ImageOutlinedTextNode: FrameSKNode {
     let imageNode: SKSpriteNode
     let textNode: OutlinedLabelNode
     let textNodeOffsetY = -1.0

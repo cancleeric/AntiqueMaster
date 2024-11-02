@@ -7,6 +7,7 @@
 //
 //  此文件包含 RoundedButton 類別，該類別是一個圓角按鈕，支援顯示文字和圖片，並具有可選的通知徽章。
 //  動畫相關的邏輯已經移動到 AnimationHelper 類別中，這裡只負責調用 AnimationHelper 中的方法。
+//  根據字體大小設置 outlineWidth，最小值為 1.0
 
 import SpriteKit
 import SwiftUI
@@ -74,9 +75,11 @@ class RoundedButton: SKShapeNode, CancelableTouch {
         cornerRadius: CGFloat? = nil
     ) {
 
+        // 根據字體大小設置 outlineWidth，最小值為 1.0
+        let outlineWidth = max(fontSize * 0.05, 1.0)
         imageTextNode = ImageOutlinedTextNode(
             imageName: image ?? "", text: text, fontSize: fontSize, fontColor: .white,
-            outlineColor: darkColor)
+            outlineColor: darkColor, outlineWidth: outlineWidth)
         self.normalColor = normalColor
         self.darkColor = darkColor
 
