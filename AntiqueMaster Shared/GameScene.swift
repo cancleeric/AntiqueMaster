@@ -70,7 +70,7 @@ class GameScene: GridScene {
 
         developmentNode.setupNodes(
             availableWidth: adjustedSize.width, availableHeight: adjustedSize.height)
-        // gameSceneNode.addChild(developmentNode)
+//         gameSceneNode.addChild(developmentNode)
 
         developmentNode.assignRolesToPlayers()
 

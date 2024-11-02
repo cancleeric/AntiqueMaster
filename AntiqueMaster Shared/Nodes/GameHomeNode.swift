@@ -50,7 +50,7 @@ class GameHomeNode: SKNode {
         let buttonWidth = availableWidth / 6
         let buttonHeight: CGFloat = buttonWidth
 
-        let buttonTitles = ["進入", "開始", "設定", "幫助", "結束"]
+        let buttonTitles = ["商店", "收藏", "鑑寶", "門派", "活動"]
         let buttonColors: [(normal: UIColor, dark: UIColor)] = [
             (Colors.ButtonBlock.uiColor, Colors.ButtonBlockDark.uiColor),
             (Colors.ButtonBlue.uiColor, Colors.ButtonBlueDark.uiColor),
@@ -78,32 +78,35 @@ class GameHomeNode: SKNode {
         // Calculate body height
         let headHeight: CGFloat = headHStack.frame.height
         let footHeight: CGFloat = footHStack.frame.height
-        let bodyHeight: CGFloat = availableHeight * 0.8 - headHeight - footHeight
+        let bodyHeight: CGFloat = availableHeight - headHeight - footHeight
 
         // Setup body buttons
-        let bodyButtonWidth = availableWidth * 0.8
-        let bodyButtonHeight: CGFloat = bodyHeight * 0.4
+        let bodyButtonWidth = 660.0
+        let bodyButtonHeight: CGFloat = 220
 
         let enterButton = RoundedButton(
-            text: "入局", width: bodyButtonWidth, height: bodyButtonHeight, fontSize: 96,
+            text: "查找房間", width: bodyButtonWidth, height: bodyButtonHeight, fontSize: 96,
             normalColor: Colors.ButtonPurple.uiColor, darkColor: Colors.ButtonPurpleDark.uiColor)
         let startButton = RoundedButton(
-            text: "開局", width: bodyButtonWidth, height: bodyButtonHeight, fontSize: 96,
+            text: "快速開局", width: bodyButtonWidth, height: bodyButtonHeight, fontSize: 96,
             normalColor: Colors.ButtonYellow.uiColor, darkColor: Colors.ButtonYellowDark.uiColor)
 
         // Arrange body buttons vertically
-        let bodyVStack = VStackNode(containerHeight: bodyHeight, spacing: 0, padding: 0)
-        bodyVStack.addElement(enterButton)
+        let bodyVStack = VStackNode(containerHeight: bodyHeight * 0.98, spacing: 0, padding: 0)
         bodyVStack.addElement(SpacerNode())
+        bodyVStack.addElement(SpacerNode())
+        bodyVStack.addElement(enterButton)
         bodyVStack.addElement(startButton)
+        bodyVStack.addElement(SpacerNode())
         bodyVStack.showBorder(color: .red)  // 顯示紅色邊框
 
         // Combine head, body, and foot using VStackNode
-        let vStack = VStackNode(containerHeight: availableHeight, spacing: 0, padding: 20)
+        let vStack = VStackNode(containerHeight: availableHeight, spacing: 0, padding: 0)
 
         vStack.addElement(headHStack)
-        vStack.addElement(bodyVStack)
         vStack.addElement(SpacerNode())
+        vStack.addElement(bodyVStack)
+
         vStack.addElement(footHStack)
 
         vStack.showBorder(color: .black)

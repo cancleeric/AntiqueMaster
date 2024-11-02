@@ -25,10 +25,10 @@ class StackNode: FrameSKNode {
     }
 
     // 覆載 frame 屬性，計算時加上 padding
-    override var frame: CGRect {
-        let accumulatedFrame = self.calculateAccumulatedFrame()
-        return accumulatedFrame.insetBy(dx: -padding, dy: -padding)
-    }
+    // override var frame: CGRect {
+    //     let accumulatedFrame = self.calculateAccumulatedFrame()
+    //     return accumulatedFrame.insetBy(dx: -padding, dy: -padding)
+    // }
 
     // 新增單個元件到 StackNode，並重新計算排列
     func addElement(_ element: SKNode) {

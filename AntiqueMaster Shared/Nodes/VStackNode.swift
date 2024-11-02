@@ -8,11 +8,11 @@
 import SpriteKit
 
 class VStackNode: StackNode {
-    private var totalHeight: CGFloat = 0  // 容器的 總高度
+    private var containerHeight: CGFloat = 0  // 改名：容器的總高度
 
     // 初始化，設置容器高度、間距和 padding
     init(containerHeight: CGFloat, spacing: CGFloat = 0, padding: CGFloat = 0) {
-        self.totalHeight = containerHeight
+        self.containerHeight = containerHeight
         super.init(spacing: spacing, padding: padding)
     }
 
@@ -22,40 +22,46 @@ class VStackNode: StackNode {
 
     // 重新計算所有元件的位置與縮放
     override func layoutElements() {
-        var totalElementHeight: CGFloat = 0
-        var spacerCount: Int = 0
+        var contentHeight: CGFloat = 0
+        var spacerNodes: [SpacerNode] = []
+        var lastNode: SKNode?
 
-        // 計算固定高度的元素總高度和 SpacerNode 的數量
+        // 先計算非 SpacerNode 的總高度
         for element in elements {
-            if element is SpacerNode {
-                spacerCount += 1
+            if let spacerNode = element as? SpacerNode {
+                spacerNodes.append(spacerNode)
             } else {
-                totalElementHeight += element.frame.height
+                contentHeight += element.frame.height
+                lastNode = element
             }
         }
 
-        // 計算總間距
-        let totalSpacing = spacing * CGFloat(elements.count - 1)
+        // 計算 SpacerNode 的高度
+        let spacerHeight = max(
+            0,
+            (containerHeight - contentHeight - CGFloat(elements.count - spacerNodes.count - 1)
+                * spacing - 2 * padding)
+                / CGFloat(max(1, spacerNodes.count))
+        )
 
-        // 計算每個 SpacerNode 的高度
-        let availableHeight = totalHeight - padding * 2 - totalElementHeight - totalSpacing
-        let spacerHeight = spacerCount > 0 ? availableHeight / CGFloat(spacerCount) : 0
+        // 從最上方開始排列
+        var currentY: CGFloat = containerHeight / 2 - padding
 
-        // 設定起始 y 位置，從上到下依次排列，讓所有元件均勻排列
-        var currentY: CGFloat = totalHeight / 2 - padding
-
-        // 重新排列所有元件，並調整每個元件的 y 位置
+        // 重新排列所有元素
         for element in elements {
-            if let spacer = element as? SpacerNode {
-                spacer.size.height = spacerHeight
-                currentY -= spacer.size.height / 2
-                spacer.position = CGPoint(x: 0, y: currentY)
-                currentY -= spacer.size.height / 2 + spacing
+            if let spacerNode = element as? SpacerNode {
+                spacerNode.size = CGSize(width: 1, height: spacerHeight)
+            }
+            
+            currentY -= element.frame.height / 2
+            element.position = CGPoint(x: 0, y: currentY)
+            // 如果不是最後一個元素，則減去元素高度和間距
+            if element != lastNode && !(element is SpacerNode)  {
+                currentY -= element.frame.height / 2 + spacing
             } else {
                 currentY -= element.frame.height / 2
-                element.position = CGPoint(x: 0, y: currentY)
-                currentY -= element.frame.height / 2 + spacing
             }
+            
         }
     }
 }

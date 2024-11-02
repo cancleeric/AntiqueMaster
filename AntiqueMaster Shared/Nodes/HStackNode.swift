@@ -8,11 +8,11 @@
 import SpriteKit
 
 class HStackNode: StackNode {
-    private var totalWidth: CGFloat = 0  // 容器的 總寬度
+    private var containerWidth: CGFloat = 0  // 容器的 總寬度
 
     // 初始化，設置容器寬度、間距和 padding
     init(containerWidth: CGFloat, spacing: CGFloat = 0, padding: CGFloat = 0) {
-        self.totalWidth = containerWidth
+        self.containerWidth = containerWidth
         super.init(spacing: spacing, padding: padding)
     }
 
@@ -22,34 +22,46 @@ class HStackNode: StackNode {
 
     // 重新計算所有元件的位置與縮放
     override func layoutElements() {
-        var currentX = -totalWidth / 2 + padding
-        var totalFixedWidth: CGFloat = 0
-        var spacerCount: Int = 0
+        var contentWidth: CGFloat = 0
+        var spacerNodes: [SpacerNode] = []
+        var lastNode: SKNode?
 
-        // 計算固定寬度的元素總寬度和 SpacerNode 的數量
+        // 先計算非 SpacerNode 的總寬度
         for element in elements {
-            if element is SpacerNode {
-                spacerCount += 1
+            if let spacerNode = element as? SpacerNode {
+                spacerNodes.append(spacerNode)
             } else {
-                totalFixedWidth += element.frame.width
+                contentWidth += element.frame.width
+                lastNode = element
             }
         }
 
-        // 計算每個 SpacerNode 的寬度
-        let totalSpacing = CGFloat(elements.count - 1) * spacing
-        let availableWidth = totalWidth - padding * 2 - totalFixedWidth - totalSpacing
-        let spacerWidth = spacerCount > 0 ? availableWidth / CGFloat(spacerCount) : 0
+        // 計算 SpacerNode 的寬度
+        let spacerWidth = max(
+            0,
+            (self.containerWidth - contentWidth - CGFloat(elements.count - spacerNodes.count - 1)
+                * spacing - 2 * padding)
+                / CGFloat(max(1, spacerNodes.count))
+        )
 
-        // 重新排列所有元素
+        // 從最左邊開始排列
+        var currentX: CGFloat = -self.containerWidth / 2 + padding
+
+        // 重新排列所有元素，先重新指定SpacerNode的Size, 在依下列規則排列, 如果不是最後一個元素也不是SpacerNode 則加上間距／2 ，其他則加上元素的寬度／2+spacing
         for element in elements {
-            if let spacer = element as? SpacerNode {
-                spacer.size.width = spacerWidth
-                spacer.position = CGPoint(x: currentX + spacer.size.width / 2, y: 0)
-                currentX += spacer.size.width + spacing
+            if let spacerNode = element as? SpacerNode {
+                spacerNode.size = CGSize(width: spacerWidth, height: 1)
+            }
+
+            currentX += element.frame.size.width / 2
+            element.position = CGPoint(x: currentX, y: 0)
+
+            if element != lastNode && !(element is SpacerNode) {
+                currentX += element.frame.size.width / 2 + spacing
             } else {
-                element.position = CGPoint(x: currentX + element.frame.width / 2, y: 0)
-                currentX += element.frame.width + spacing
+                currentX += element.frame.size.width / 2
             }
         }
+
     }
 }

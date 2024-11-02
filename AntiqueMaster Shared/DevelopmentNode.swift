@@ -17,7 +17,7 @@ class DevelopmentNode: SKNode {
         guard let zodiacManagerNode = zodiacManagerNode else { return }
 
         zodiacManagerNode.setupZodiacNodes(
-            availableWidth: availableWidth * 0.8, availableHeight: availableHeight * 0.8)
+            availableWidth: availableWidth , availableHeight: availableHeight )
         self.addChild(zodiacManagerNode)
 
         gameRoleLabelManagerNode = GameRoleLabelManagerNode()

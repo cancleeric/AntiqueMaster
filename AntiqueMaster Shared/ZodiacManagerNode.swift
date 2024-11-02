@@ -13,32 +13,42 @@ import SpriteKit
 class ZodiacManagerNode: SKNode {
     let itemsPerRow = 3
     let itemsPerColumn = 4
-    let horizontalSpacing: CGFloat = 20
-    let verticalSpacing: CGFloat = 20
+    let horizontalSpacing: CGFloat = 0
+    let verticalSpacing: CGFloat = 0
 
     /// 設置 Zodiac 節點
     func setupZodiacNodes(availableWidth: CGFloat, availableHeight: CGFloat) {
-        let maxItemWidth =
+        let maxItemWidth = 0.8 *
             (availableWidth - CGFloat(itemsPerRow - 1) * horizontalSpacing) / CGFloat(itemsPerRow)
         let maxItemHeight =
             (availableHeight - CGFloat(itemsPerColumn - 1) * verticalSpacing)
             / CGFloat(itemsPerColumn)
-        let maxItemSize = CGSize(width: maxItemWidth, height: maxItemHeight)
+        let maxItemSize = CGSize(width: maxItemWidth, height: maxItemHeight )
 
         let vStack = VStackNode(containerHeight: availableHeight)
         self.addChild(vStack)
+        vStack.addElement(SpacerNode())
+//        vStack.addElement(SpacerNode())
+//        vStack.addElement(SpacerNode())
 
         for row in 0..<itemsPerColumn {
-            let hStack = HStackNode(containerWidth: availableWidth)
+            let hStack = HStackNode(containerWidth: availableWidth, spacing: 0, padding: 0)
+            
             for column in 0..<itemsPerRow {
                 let index = row * itemsPerRow + column
                 if index < ZodiacNode.zodiacNames.count {
                     let statue = ZodiacNode(
                         name: ZodiacNode.zodiacNames[index], maxSize: maxItemSize)
+                    hStack.addElement(SpacerNode())
                     hStack.addElement(statue)
+                    
                 }
             }
+//            hStack.addElement(SpacerNode())
+            hStack.addElement(SpacerNode())
             vStack.addElement(hStack)
+            
+            vStack.addElement(SpacerNode())
         }
     }
 }
