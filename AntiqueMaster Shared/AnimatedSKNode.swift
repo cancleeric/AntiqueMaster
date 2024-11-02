@@ -8,7 +8,7 @@
 import SpriteKit
 
 // 動畫處理的基類
-class AnimatedSKNode: FrameSKNode {
+class AnimatedSKNode: SKNode {
     // 直接縮放到指定的 scaleY
     func performScalingAnimation(
         to scale: CGFloat, duration: TimeInterval, completion: (() -> Void)? = nil
