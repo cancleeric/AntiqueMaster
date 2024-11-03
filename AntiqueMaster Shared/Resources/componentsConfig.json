@@ -1,0 +1,148 @@
+{
+    "components": [
+        {
+            "name": "playerImage",
+            "type": "image",
+            "imageName": "logoImage",
+            "width": 256,
+            "height": 256
+        },
+        {
+            "name": "playerNameLabel",
+            "type": "label",
+            "text": "玩家姓名",
+            "fontSize": 48,
+            "fontColor": "white",
+            "outlineColor": "black",
+            "outlineWidth": 1
+        },
+        {
+            "name": "roomNumberTextField",
+            "type": "textfield",
+            "placeholder": "輸入房號",
+            "fontSize": 48,
+            "fontColor": "white",
+            "backgroundColor": "gray"
+        },
+        {
+            "name": "enterButton",
+            "type": "button",
+            "text": "查找房間",
+            "width": 200,
+            "height": 100,
+            "fontSize": 48,
+            "normalColor": "ButtonPurple",
+            "darkColor": "ButtonPurpleDark"
+        },
+        {
+            "name": "startButton",
+            "type": "button",
+            "text": "快速開局",
+            "width": 660,
+            "height": 220,
+            "fontSize": 96,
+            "normalColor": "ButtonYellow",
+            "darkColor": "ButtonYellowDark"
+        },
+        {
+            "name": "shopButton",
+            "type": "button",
+            "text": "商店",
+            "width": 200,
+            "height": 200,
+            "fontSize": 48,
+            "normalColor": "ButtonBlock",
+            "darkColor": "ButtonBlockDark"
+        },
+        {
+            "name": "collectionButton",
+            "type": "button",
+            "text": "收藏",
+            "width": 200,
+            "height": 200,
+            "fontSize": 48,
+            "normalColor": "ButtonBlue",
+            "darkColor": "ButtonBlueDark"
+        },
+        {
+            "name": "appraisalButton",
+            "type": "button",
+            "text": "鑑寶",
+            "width": 200,
+            "height": 200,
+            "fontSize": 48,
+            "normalColor": "ButtonGreen",
+            "darkColor": "ButtonGreenDark"
+        },
+        {
+            "name": "sectButton",
+            "type": "button",
+            "text": "門派",
+            "width": 200,
+            "height": 200,
+            "fontSize": 48,
+            "normalColor": "ButtonOrange",
+            "darkColor": "ButtonOrangeDark"
+        },
+        {
+            "name": "eventButton",
+            "type": "button",
+            "text": "活動",
+            "width": 200,
+            "height": 200,
+            "fontSize": 48,
+            "normalColor": "ButtonRed",
+            "darkColor": "ButtonRedDark"
+        },
+        {
+            "name": "otherButton",
+            "type": "button",
+            "text": "其他",
+            "width": 200,
+            "height": 100,
+            "fontSize": 48,
+            "normalColor": "ButtonYellow",
+            "darkColor": "ButtonYellowDark"
+        },
+        {
+            "name": "announcementButton",
+            "type": "button",
+            "text": "公告",
+            "width": 200,
+            "height": 100,
+            "fontSize": 48,
+            "normalColor": "ButtonBlue",
+            "darkColor": "ButtonBlueDark"
+        },
+        {
+            "name": "rankingButton",
+            "type": "button",
+            "text": "排行榜",
+            "width": 200,
+            "height": 100,
+            "fontSize": 48,
+            "normalColor": "ButtonBlue",
+            "darkColor": "ButtonBlueDark"
+        },
+        {
+            "name": "recordButton",
+            "type": "button",
+            "text": "戰績",
+            "width": 200,
+            "height": 100,
+            "fontSize": 48,
+            "normalColor": "ButtonBlue",
+            "darkColor": "ButtonBlueDark"
+        },
+        {
+            "name": "tutorialButton",
+            "type": "button",
+            "text": "新手教程",
+            "width": 200,
+            "height": 100,
+            "fontSize": 48,
+            "normalColor": "ButtonBlue",
+            "darkColor": "ButtonBlueDark"
+        }
+    ]
+}

@@ -41,14 +41,18 @@
 				GridNode.swift,
 				GridScene.swift,
 				Models/GameRole.swift,
+				Nodes/ComponentFactory.swift,
 				Nodes/GameHomeNode.swift,
 				Nodes/GameSceneNode.swift,
 				Nodes/HStackNode.swift,
+				Nodes/LayoutManager.swift,
 				Nodes/SKTextFieldNode.swift,
 				Nodes/SpacerNode.swift,
 				Nodes/StackNode.swift,
 				Nodes/TextInputViewController.swift,
 				Nodes/VStackNode.swift,
+				Resources/componentsConfig.json,
+				Resources/layoutConfig.json,
 				SafeAreaManager.swift,
 				ScaledSpriteNode.swift,
 				SKNode.swift,
@@ -107,6 +111,7 @@
 				186442512CC401CD00C0CDB5 /* LICENSE */,
 				186442172CC3E6AE00C0CDB5 /* Products */,
 				1864424F2CC3FDC900C0CDB5 /* README.md */,
+				18E93CA82CD7D843005723C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +121,13 @@
 				186442162CC3E6AE00C0CDB5 /* AntiqueMaster.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		18E93CA82CD7D843005723C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

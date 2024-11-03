@@ -1,0 +1,125 @@
+{
+    "layout": {
+        "type": "vstack",
+        "spacing": 10,
+        "padding": 20,
+        "elements": [
+            {
+                "type": "hstack",
+                "spacing": 20,
+                "padding": 20,
+                "elements": [
+                    {
+                        "type": "component",
+                        "name": "playerImage"
+                    },
+                    {
+                        "type": "vstack",
+                        "spacing": 10,
+                        "padding": 0,
+                        "elements": [
+                            {
+                                "type": "component",
+                                "name": "playerNameLabel"
+                            },
+                            {
+                                "type": "component",
+                                "name": "roomNumberTextField"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "component",
+                        "name": "enterButton"
+                    },
+                    {
+                        "type": "spacer"
+                    }
+                ]
+            },
+            {
+                "type": "spacer"
+            },
+            {
+                "type": "vstack",
+                "spacing": 0,
+                "padding": 0,
+                "elements": [
+                    {
+                        "type": "hstack",
+                        "spacing": 20,
+                        "padding": 20,
+                        "elements": [
+                            {
+                                "type": "component",
+                                "name": "announcementButton"
+                            },
+                            {
+                                "type": "component",
+                                "name": "rankingButton"
+                            },
+                            {
+                                "type": "component",
+                                "name": "recordButton"
+                            },
+                            {
+                                "type": "component",
+                                "name": "tutorialButton"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "spacer"
+                    },
+                    {
+                        "type": "spacer"
+                    },
+                    {
+                        "type": "component",
+                        "name": "startButton"
+                    },
+                    {
+                        "type": "spacer"
+                    }
+                ]
+            },
+            {
+                "type": "hstack",
+                "spacing": 20,
+                "padding": 0,
+                "elements": [
+                    {
+                        "type": "spacer"
+                    },
+                    {
+                        "type": "component",
+                        "name": "shopButton"
+                    },
+                    {
+                        "type": "component",
+                        "name": "collectionButton"
+                    },
+                    {
+                        "type": "component",
+                        "name": "appraisalButton"
+                    },
+                    {
+                        "type": "component",
+                        "name": "sectButton"
+                    },
+                    {
+                        "type": "component",
+                        "name": "eventButton"
+                    },
+                    {
+                        "type": "component",
+                        "name": "otherButton"
+                    },
+                    {
+                        "type": "spacer"
+                    }
+                ]
+            }
+        ]
+    }
+}
