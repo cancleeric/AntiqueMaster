@@ -11,6 +11,7 @@ import SpriteKit
 class GameHomeNode: SKNode {
     var playerImageNode: SKSpriteNode?
     var playerNameLabel: OutlinedLabelNode?
+    var roomNumberTextField: SKTextFieldNode?  // 新增房號輸入框
     var enterButton: RoundedButton?
     var startButton: RoundedButton?
     var settingsButton: RoundedButton?
@@ -39,6 +40,15 @@ class GameHomeNode: SKNode {
         )
         guard let playerNameLabel = playerNameLabel else { return }
 
+        // Setup room number text field
+        roomNumberTextField = SKTextFieldNode(
+            placeholder: "輸入房號",
+            fontSize: 48,
+            fontColor: .white,
+            backgroundColor: .gray
+        )
+        guard let roomNumberTextField = roomNumberTextField else { return }
+
         // Setup enter button
         enterButton = RoundedButton(
             text: "查找房間", width: 200, height: 100, fontSize: 48,
@@ -46,10 +56,11 @@ class GameHomeNode: SKNode {
         )
         guard let enterButton = enterButton else { return }
 
-        // Arrange player image, name label, and enter button horizontally
+        // Arrange player image, name label, room number text field, and enter button horizontally
         let headHStack = HStackNode(containerWidth: availableWidth, spacing: 20, padding: 20)
         headHStack.addElement(playerImageNode)
         headHStack.addElement(playerNameLabel)
+        headHStack.addElement(roomNumberTextField)  // 將房號輸入框添加到這裡
         headHStack.addElement(enterButton)  // 將查找房間按鈕添加到這裡
         headHStack.addElement(SpacerNode())
         headHStack.showBorder(color: .blue)
