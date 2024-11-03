@@ -39,17 +39,24 @@ class GameHomeNode: SKNode {
         )
         guard let playerNameLabel = playerNameLabel else { return }
 
-        // Arrange player image and name label horizontally
-        let headHStack = HStackNode(containerWidth: availableWidth, spacing: 0, padding: 20)
+        // Setup enter button
+        enterButton = RoundedButton(
+            text: "查找房間", width: 200, height: 100, fontSize: 48,
+            normalColor: Colors.ButtonPurple.uiColor, darkColor: Colors.ButtonPurpleDark.uiColor
+        )
+        guard let enterButton = enterButton else { return }
+
+        // Arrange player image, name label, and enter button horizontally
+        let headHStack = HStackNode(containerWidth: availableWidth, spacing: 20, padding: 20)
         headHStack.addElement(playerImageNode)
         headHStack.addElement(playerNameLabel)
+        headHStack.addElement(enterButton)  // 將查找房間按鈕添加到這裡
         headHStack.addElement(SpacerNode())
-        headHStack.showBorder(color: .blue)  // 顯示藍色邊框
+        headHStack.showBorder(color: .blue)
 
-        // Setup buttons
+        // Setup other buttons
         let buttonWidth = availableWidth / 6
         let buttonHeight: CGFloat = buttonWidth
-
         let buttonTitles = ["商店", "收藏", "鑑寶", "門派", "活動"]
         let buttonColors: [(normal: UIColor, dark: UIColor)] = [
             (Colors.ButtonBlock.uiColor, Colors.ButtonBlockDark.uiColor),
@@ -60,7 +67,6 @@ class GameHomeNode: SKNode {
             (Colors.ButtonYellow.uiColor, Colors.ButtonYellowDark.uiColor),
         ]
         var buttons: [RoundedButton] = []
-
         for (index, title) in buttonTitles.enumerated() {
             let button = RoundedButton(
                 text: title, width: buttonWidth, height: buttonHeight, fontSize: 48,
@@ -73,7 +79,7 @@ class GameHomeNode: SKNode {
         footHStack.addElement(SpacerNode())
         footHStack.addElements(buttons)
         footHStack.addElement(SpacerNode())
-        footHStack.showBorder(color: .green)  // 顯示綠色邊框
+        footHStack.showBorder(color: .green)
 
         // Calculate body height
         let headHeight: CGFloat = headHStack.frame.height
@@ -83,33 +89,27 @@ class GameHomeNode: SKNode {
         // Setup body buttons
         let bodyButtonWidth = 660.0
         let bodyButtonHeight: CGFloat = 220
-
-        let enterButton = RoundedButton(
-            text: "查找房間", width: bodyButtonWidth, height: bodyButtonHeight, fontSize: 96,
-            normalColor: Colors.ButtonPurple.uiColor, darkColor: Colors.ButtonPurpleDark.uiColor)
         let startButton = RoundedButton(
             text: "快速開局", width: bodyButtonWidth, height: bodyButtonHeight, fontSize: 96,
-            normalColor: Colors.ButtonYellow.uiColor, darkColor: Colors.ButtonYellowDark.uiColor)
+            normalColor: Colors.ButtonYellow.uiColor, darkColor: Colors.ButtonYellowDark.uiColor
+        )
 
         // Arrange body buttons vertically
         let bodyVStack = VStackNode(containerHeight: bodyHeight * 0.98, spacing: 0, padding: 0)
         bodyVStack.addElement(SpacerNode())
         bodyVStack.addElement(SpacerNode())
-        bodyVStack.addElement(enterButton)
         bodyVStack.addElement(startButton)
         bodyVStack.addElement(SpacerNode())
-        bodyVStack.showBorder(color: .red)  // 顯示紅色邊框
+        bodyVStack.showBorder(color: .red)
 
         // Combine head, body, and foot using VStackNode
         let vStack = VStackNode(containerHeight: availableHeight, spacing: 0, padding: 0)
-
         vStack.addElement(headHStack)
         vStack.addElement(SpacerNode())
         vStack.addElement(bodyVStack)
-
         vStack.addElement(footHStack)
-
         vStack.showBorder(color: .black)
+
         self.addChild(vStack)
     }
 
