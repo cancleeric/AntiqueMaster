@@ -41,6 +41,9 @@ class ComponentFactory {
         }
 
         print("Found configuration for component: \(config)")
+        if config["type"] as? String == "null" {
+            return nil
+        }
         return createComponent(from: config)
     }
 

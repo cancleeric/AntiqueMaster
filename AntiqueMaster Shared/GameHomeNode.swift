@@ -34,9 +34,9 @@ class GameHomeNode: SKNode {
         }
 
         // Setup player image
-        playerImageNode =
-            ComponentFactory.createComponent(named: "playerImage") as? SKSpriteNode
-        guard let playerImageNode = playerImageNode else { return }
+        // playerImageNode =
+        //     ComponentFactory.createComponent(named: "playerImage") as? SKSpriteNode
+        // guard let playerImageNode = playerImageNode else { return }
 
         playerNameLabel =
             ComponentFactory.createComponent(named: "playerNameLabel") as? OutlinedLabelNode
@@ -52,7 +52,7 @@ class GameHomeNode: SKNode {
 
         // Arrange player image, name label, room number text field, and enter button horizontally
         let headHStack = HStackNode(containerWidth: availableWidth, spacing: 20, padding: 20)
-        headHStack.addElement(playerImageNode)
+        headHStack.addElement(ComponentFactory.createComponent(named: "playerImage"))
         headHStack.addElement(playerNameLabel)
         headHStack.addElement(roomNumberTextField)  // 將房號輸入框添加到這裡
         headHStack.addElement(enterButton)  // 將查找房間按鈕添加到這裡
@@ -96,6 +96,11 @@ class GameHomeNode: SKNode {
         let startButton = ComponentFactory.createComponent(named: "startButton") as? RoundedButton
         guard let startButton = startButton else { return }
 
+        // 設置 startButton 的 action
+        startButton.action = { [weak self] in
+            self?.enterGame()
+        }
+
         // Arrange body buttons vertically
         let bodyVStack = VStackNode(containerHeight: bodyHeight * 0.98, spacing: 0, padding: 0)
         bodyVStack.addElement(SpacerNode())
@@ -113,6 +118,12 @@ class GameHomeNode: SKNode {
         vStack.showBorder(color: .black)
 
         self.addChild(vStack)
+    }
+
+    /// 進入遊戲的函式
+    func enterGame() {
+        print("Entering the game...")
+        // 在這裡添加進入遊戲的邏輯
     }
 
     // Additional methods for button actions can be added here

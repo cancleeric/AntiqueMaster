@@ -31,16 +31,18 @@ class StackNode: FrameSKNode {
     // }
 
     // 新增單個元件到 StackNode，並重新計算排列
-    func addElement(_ element: SKNode) {
+    func addElement(_ element: SKNode?) {
+        guard let element = element else { return }
         elements.append(element)
         self.addChild(element)
         layoutElements()  // 每次添加完後重新計算位置
     }
 
     // 支援新增多個元件（陣列）到 StackNode
-    func addElements(_ elementsArray: [SKNode]) {
-        elements.append(contentsOf: elementsArray)  // 添加陣列中的所有元素
+    func addElements(_ elementsArray: [SKNode?]) {
         for element in elementsArray {
+            guard let element = element else { continue }
+            elements.append(element)
             self.addChild(element)
         }
         layoutElements()  // 添加完後重新計算位置
