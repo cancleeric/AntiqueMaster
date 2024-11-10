@@ -52,9 +52,11 @@ class DevelopmentNode: SKNode {
         ]
         roles.shuffle()
 
-        for i in 0..<GameDataCenter.shared.players.count {
-            GameDataCenter.shared.players[i].role = roles[i % roles.count]
+        var players = GameDataCenter.shared.players
+        for i in 0..<players.count {
+            players[i].role = roles[i % roles.count]
         }
+        GameDataCenter.shared.initializePlayers(names: players.map { $0.name })
 
         displayPlayerRoles()
     }

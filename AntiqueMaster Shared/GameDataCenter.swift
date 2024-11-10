@@ -7,23 +7,23 @@
 
 import Foundation
 
-/// 遊戲數據中心，負責管理遊戲中的所有數據
 class GameDataCenter {
     static let shared = GameDataCenter()
 
-    private init() {}
+    init() {}
 
-    var players: [Player] = []
-
-    /// 初始化玩家資料
-    func initializePlayers(names: [String]) {
-        players = names.map { Player(name: $0) }
+    private var _players = SafeStorageQueue<Player>(
+        label: "com.antiquemaster.gamedatacenter.players")
+    var players: [Player] {
+        return _players.getAll()
     }
 
-    /// 初始化遊戲數據中心
-    func initializeGameDataCenter() {
-        self.initializePlayers(names: [
-            "Player1", "Player2", "Player3", "Player4", "Player5", "Player6", "Player7", "Player8",
-        ])
+    func initializePlayers(names: [String]) {
+        reset()
+        _players.add(contentsOf: names.map { Player(name: $0) })
+    }
+
+    func reset() {
+        _players.clear()  // 清空 _players
     }
 }

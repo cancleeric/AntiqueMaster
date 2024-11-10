@@ -47,4 +47,14 @@ class SafeAccessQueue<Element> {
             return nil
         }
     }
+
+    /// 獲取並移除佇列中的所有元素。
+    /// - Returns: 佇列中的所有元素，如果佇列為空則返回空陣列。
+    func getAll() -> [Element] {
+        return queue.sync {
+            let allElements = elements
+            elements.removeAll()
+            return allElements
+        }
+    }
 }

@@ -52,7 +52,7 @@ class GameScene: GridScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
 
-        GameDataCenter.shared.initializeGameDataCenter()  // 初始化遊戲數據中心
+        // GameDataCenter.shared.initializeGameDataCenter()  // 移除初始化遊戲數據中心的調用
 
         gameSceneNode = GameSceneNode()
         guard let gameSceneNode = gameSceneNode else { return }
@@ -70,7 +70,7 @@ class GameScene: GridScene {
 
         developmentNode.setupNodes(
             availableWidth: adjustedSize.width, availableHeight: adjustedSize.height)
-//         gameSceneNode.addChild(developmentNode)
+        //         gameSceneNode.addChild(developmentNode)
 
         developmentNode.assignRolesToPlayers()
 

@@ -11,71 +11,31 @@
 		186442522CC401CD00C0CDB5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 186442512CC401CD00C0CDB5 /* LICENSE */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1830EA162CE02FF600B176E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 186442092CC3E6AC00C0CDB5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 186442152CC3E6AE00C0CDB5;
+			remoteInfo = "AntiqueMaster iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1830EA122CE02FF600B176E3 /* AntiqueMasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AntiqueMasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		186442162CC3E6AE00C0CDB5 /* AntiqueMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AntiqueMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864424F2CC3FDC900C0CDB5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		186442512CC401CD00C0CDB5 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		186442392CC3E6AE00C0CDB5 /* Exceptions for "AntiqueMaster Shared" folder in "AntiqueMaster iOS" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Actions.sks,
-				AnimatedSKNode.swift,
-				AnimationHelper.swift,
-				Assets.xcassets,
-				BorderedNode.swift,
-				Button/ButtonNode.swift,
-				Button/RoundedButton.swift,
-				DebugLogger.swift,
-				DevelopmentNode.swift,
-				DeviceLayer.swift,
-				EnumColors.swift,
-				extension/extensionUIColor.swift,
-				FrameSKNode.swift,
-				GameDataCenter.swift,
-				GameHomeNode.swift,
-				GameRoleLabelManagerNode.swift,
-				GameScene.sks,
-				GameScene.swift,
-				GridNode.swift,
-				GridScene.swift,
-				Models/GameRole.swift,
-				Nodes/ComponentFactory.swift,
-				Nodes/GameSceneNode.swift,
-				Nodes/HStackNode.swift,
-				Nodes/LayoutManager.swift,
-				Nodes/SKTextFieldNode.swift,
-				Nodes/SpacerNode.swift,
-				Nodes/StackNode.swift,
-				Nodes/TextInputViewController.swift,
-				Nodes/VStackNode.swift,
-				Resources/componentsConfig.json,
-				Resources/layoutConfig.json,
-				SafeAreaManager.swift,
-				ScaledSpriteNode.swift,
-				SKNode.swift,
-				TextLabel/AnimatedMultiNumberLabel.swift,
-				TextLabel/ImageOutlinedTextNode.swift,
-				TextLabel/ImageTextNode.swift,
-				TextLabel/OutlinedLabelNode.swift,
-				TextLabel/OutlinedShadowedLabelNode.swift,
-				TextLabel/ShadowedLabel.swift,
-				ZodiacManagerNode.swift,
-				ZodiacNode.swift,
-				ZodiacStatue.swift,
-			);
-			target = 186442152CC3E6AE00C0CDB5 /* AntiqueMaster iOS */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		1830EA1F2CE0327700B176E3 /* AntiqueMasterTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AntiqueMasterTests;
+			sourceTree = "<group>";
+		};
 		1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				186442392CC3E6AE00C0CDB5 /* Exceptions for "AntiqueMaster Shared" folder in "AntiqueMaster iOS" target */,
-			);
 			path = "AntiqueMaster Shared";
 			sourceTree = "<group>";
 		};
@@ -84,14 +44,16 @@
 			path = "AntiqueMaster iOS";
 			sourceTree = "<group>";
 		};
-		18E5D39E2CC5510B008425A0 /* AntiqueMasterTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AntiqueMasterTests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1830EA0F2CE02FF600B176E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		186442132CC3E6AE00C0CDB5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -105,9 +67,9 @@
 		186442082CC3E6AC00C0CDB5 = {
 			isa = PBXGroup;
 			children = (
+				1830EA1F2CE0327700B176E3 /* AntiqueMasterTests */,
 				186442182CC3E6AE00C0CDB5 /* AntiqueMaster iOS */,
 				1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */,
-				18E5D39E2CC5510B008425A0 /* AntiqueMasterTests */,
 				186442512CC401CD00C0CDB5 /* LICENSE */,
 				186442172CC3E6AE00C0CDB5 /* Products */,
 				1864424F2CC3FDC900C0CDB5 /* README.md */,
@@ -119,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				186442162CC3E6AE00C0CDB5 /* AntiqueMaster.app */,
+				1830EA122CE02FF600B176E3 /* AntiqueMasterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +96,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1830EA112CE02FF600B176E3 /* AntiqueMasterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1830EA182CE02FF600B176E3 /* Build configuration list for PBXNativeTarget "AntiqueMasterTests" */;
+			buildPhases = (
+				1830EA0E2CE02FF600B176E3 /* Sources */,
+				1830EA0F2CE02FF600B176E3 /* Frameworks */,
+				1830EA102CE02FF600B176E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1830EA172CE02FF600B176E3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1830EA1F2CE0327700B176E3 /* AntiqueMasterTests */,
+				1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */,
+			);
+			name = AntiqueMasterTests;
+			packageProductDependencies = (
+			);
+			productName = AntiqueMasterTests;
+			productReference = 1830EA122CE02FF600B176E3 /* AntiqueMasterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		186442152CC3E6AE00C0CDB5 /* AntiqueMaster iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1864423A2CC3E6AE00C0CDB5 /* Build configuration list for PBXNativeTarget "AntiqueMaster iOS" */;
@@ -146,6 +133,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				1864420D2CC3E6AC00C0CDB5 /* AntiqueMaster Shared */,
 				186442182CC3E6AE00C0CDB5 /* AntiqueMaster iOS */,
 			);
 			name = "AntiqueMaster iOS";
@@ -162,9 +150,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					1830EA112CE02FF600B176E3 = {
+						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1610;
+						TestTargetID = 186442152CC3E6AE00C0CDB5;
+					};
 					186442152CC3E6AE00C0CDB5 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -185,11 +178,19 @@
 			projectRoot = "";
 			targets = (
 				186442152CC3E6AE00C0CDB5 /* AntiqueMaster iOS */,
+				1830EA112CE02FF600B176E3 /* AntiqueMasterTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1830EA102CE02FF600B176E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		186442142CC3E6AE00C0CDB5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,6 +203,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1830EA0E2CE02FF600B176E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		186442122CC3E6AE00C0CDB5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -211,7 +219,61 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1830EA172CE02FF600B176E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 186442152CC3E6AE00C0CDB5 /* AntiqueMaster iOS */;
+			targetProxy = 1830EA162CE02FF600B176E3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		1830EA192CE02FF600B176E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TS7638N9FK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hurricanesoft.AntiqueMasterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "AntiqueMasterTests/AntiqueMasterTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AntiqueMaster.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AntiqueMaster";
+			};
+			name = Debug;
+		};
+		1830EA1A2CE02FF600B176E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TS7638N9FK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hurricanesoft.AntiqueMasterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "AntiqueMasterTests/AntiqueMasterTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AntiqueMaster.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AntiqueMaster";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		1864423B2CC3E6AE00C0CDB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -229,7 +291,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -265,7 +327,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -402,6 +464,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1830EA182CE02FF600B176E3 /* Build configuration list for PBXNativeTarget "AntiqueMasterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1830EA192CE02FF600B176E3 /* Debug */,
+				1830EA1A2CE02FF600B176E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1864420C2CC3E6AC00C0CDB5 /* Build configuration list for PBXProject "AntiqueMaster" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
