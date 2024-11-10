@@ -7,14 +7,13 @@
 
 import Testing
 
-@testable import AntiqueMaster
-
 struct GameDataCenterTest {
 
-    @Test func testInitializePlayers() async throws {
+    @Test
+    func testInitializePlayers() async throws {
         // Given
         let gameDataCenter = GameDataCenter.shared
-        tearDown()  // 重置狀態
+        await gameDataCenter.reset()  // 確保重置狀態
         let playerNames = ["Alice", "Bob", "Charlie"]
 
         // When
@@ -25,21 +24,22 @@ struct GameDataCenterTest {
         #expect(gameDataCenter.players.map { $0.name } == playerNames, "玩家名稱應與初始化名稱匹配")
     }
 
-    //    @Test func testInitializeGameDataCenter() async throws {
-    //        // Given
-    //        let gameDataCenter = GameDataCenter.shared
-    //        tearDown()  // 重置狀態
-    //
-    //        // When
-    //        gameDataCenter.initializeGameDataCenter()
-    //
-    //        // Then
-    //        #expect(gameDataCenter.players.count == 8, "初始化後玩家數量應為 8")
-    //        #expect(gameDataCenter.players.first?.name == "Player1", "第一個玩家名稱應為 'Player1'")
-    //        #expect(gameDataCenter.players.last?.name == "Player8", "最後一個玩家名稱應為 'Player8'")
-    //    }
+    @Test
+      func testInitializeGameDataCenter() async {
+          // Given
+          let gameDataCenter = GameDataCenter.shared
+          await gameDataCenter.reset()  // 確保重置狀態
 
-    func tearDown() {
-        GameDataCenter.shared.reset()
+          // When
+          gameDataCenter.initializePlayers(names: ["Player1", "Player2", "Player3", "Player4", "Player5", "Player6", "Player7", "Player8"])
+
+          // Then
+          #expect(gameDataCenter.players.count == 8, "初始化後玩家數量應為 8")
+          #expect(gameDataCenter.players.first?.name == "Player1", "第一個玩家名稱應為 'Player1'")
+          #expect(gameDataCenter.players.last?.name == "Player8", "最後一個玩家名稱應為 'Player8'")
+      }
+
+    func tearDown() async {
+        await GameDataCenter.shared.reset()
     }
 }

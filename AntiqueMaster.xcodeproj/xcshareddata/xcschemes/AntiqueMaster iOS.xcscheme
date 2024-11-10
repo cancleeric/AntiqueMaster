@@ -41,6 +41,28 @@
                ReferencedContainer = "container:AntiqueMaster.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "180D5E492CE072E900845202"
+               BuildableName = "UITest.xctest"
+               BlueprintName = "UITest"
+               ReferencedContainer = "container:AntiqueMaster.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "180D5E582CE072FA00845202"
+               BuildableName = "UnitTest.xctest"
+               BlueprintName = "UnitTest"
+               ReferencedContainer = "container:AntiqueMaster.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
